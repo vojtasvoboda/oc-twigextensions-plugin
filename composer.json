@@ -1,0 +1,18 @@
+{
+  "name": "vojtasvoboda/twigextensions",
+  "keywords": ["twig", "truncate", "wordwrap", "shuffle", "time_diff"],
+  "description": "Register more Twig filters for your templates",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vojta Svoboda",
+      "email": "vojtasvoboda.cz@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "twig/extensions": "^1.3",
+    "symfony/translation": "^3.0"
+  },
+  "minimum-stability": "dev"
+}
