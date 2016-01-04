@@ -152,11 +152,11 @@ Use the wordwrap filter to split your text in lines with equal length.
 This example would print:
 
 *
-Lorem ipsu
-m dolor si
-t amet, co
-nsectetur
-adipiscing
+Lorem ipsu  
+m dolor si  
+t amet, co  
+nsectetur  
+adipiscing  
 *
 
 The default separator is "\n", but you can easily change that by providing one:
@@ -168,11 +168,11 @@ The default separator is "\n", but you can easily change that by providing one:
 This would result in:
 
 *
-Lorem ipsuzz
-m dolor sizz
-t amet, cozz
-nsectetur zz
-adipiscing
+Lorem ipsuzz  
+m dolor sizz  
+t amet, cozz  
+nsectetur zz  
+adipiscing  
 *
 
 ### shuffle
