@@ -34,47 +34,47 @@ Format a local time/date according to locale settings.
 Posted at {{ article.date | strftime('%d.%m.%Y %H:%M:%S') }}
 ```
 
-The example would output Posted at 04.01.2016 22:57:42. See [more format parameters](http://php.net/manual/en/function.strftime.php#refsect1-function.strftime-parameters).
+The example would output *Posted at 04.01.2016 22:57:42*. See [more format parameters](http://php.net/manual/en/function.strftime.php#refsect1-function.strftime-parameters).
 
 ### uppercase
 
 Make a string uppercase
 
 ```
-Hello I'm {{ 'Jack' | uppercase }}.
+Hello I'm {{ 'Jack' | uppercase }}
 ```
 
-The example would output JACK.
+The example would output *Hello I'm JACK*.
 
 ### lowercase
 
 Make a string lowercase
 
 ```
-Hello I'm {{ 'JACK' | lowercase }}.
+Hello I'm {{ 'JACK' | lowercase }}
 ```
 
-The example would output jack.
+The example would output *Hello I'm jack*.
 
 ### ucfirst
 
 Make a string uppercase
 
 ```
-Hello I'm {{ 'jack' | uppercase }}.
+Hello I'm {{ 'jack' | uppercase }}
 ```
 
-The example would output *Jack.*
+The example would output *Hello I'm Jack*.
 
 ### lcfirst
 
 Make a string's first character uppercase
 
 ```
-Hello I'm {{ 'Jack' | lcfirst }}.
+Hello I'm {{ 'Jack' | lcfirst }}
 ```
 
-The example would output *jack.*
+The example would output *Hello I'm jack*.
 
 ### ltrim
 
@@ -84,7 +84,7 @@ Strip whitespace (or other characters) from the beginning of a string
 Hello I'm {{ ' jack' | ltrim }}
 ```
 
-The example would output *jack* without whitespaces from the start.
+The example would output *Hello I'm jack* without whitespaces from the start.
 
 ### rtrim
 
@@ -94,7 +94,7 @@ Strip whitespace (or other characters) from the end of a string.
 Hello I'm {{ 'jack ' | rtrim }}
 ```
 
-The example would output *jack* without whitespaces from the end.
+The example would output *Hello I'm jack* without whitespaces from the end.
 
 ### str_repeat
 
@@ -103,17 +103,18 @@ Repeat a string
 ```
 I'm {{ 'best' | str_repeat(3) }}!
 ```
-The example would output *I'm best best best*!
+
+The example would output *I'm best best best!*
 
 ### plural
 
 Get the plural form of an English word.
 
 ```
-You have {{ count }} new {{ 'mail' | plural(count) }}.
+You have {{ count }} new {{ 'mail' | plural(count) }}
 ```
 
-The example would output *You have 1 new mail.* or *You have 3 new mails.* - depends on count.
+The example would output *You have 1 new mail* or *You have 3 new mails* - depending on mails count.
 
 ### truncate
 
