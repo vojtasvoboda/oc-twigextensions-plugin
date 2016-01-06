@@ -22,10 +22,6 @@ strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
 plural, truncate, wordwrap, shuffle, time_diff, localizeddate, localizednumber, 
 localizedcurrency
 
-## Filters
-
-Below are listed all new available filters.
-
 ### strftime
 
 Format a local time/date according to locale settings.
