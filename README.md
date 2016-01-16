@@ -54,7 +54,7 @@ The example would output *Hello I'm jack*.
 
 ### ucfirst
 
-Make a string uppercase
+Make a string's first character uppercase
 
 ```
 Hello I'm {{ 'jack' | uppercase }}
@@ -64,7 +64,7 @@ The example would output *Hello I'm Jack*.
 
 ### lcfirst
 
-Make a string's first character uppercase
+Make a string's first character lowercase
 
 ```
 Hello I'm {{ 'Jack' | lcfirst }}
