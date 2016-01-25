@@ -57,7 +57,7 @@ The example would output *Hello I'm jack*.
 Make a string's first character uppercase
 
 ```
-Hello I'm {{ 'jack' | uppercase }}
+Hello I'm {{ 'jack' | ucfirst }}
 ```
 
 The example would output *Hello I'm Jack*.
@@ -97,10 +97,10 @@ The example would output *Hello I'm jack* without whitespaces from the end.
 Repeat a string
 
 ```
-I'm {{ 'best' | str_repeat(3) }}!
+I'm the {{ 'best' | str_repeat(3) }}!
 ```
 
-The example would output *I'm best best best!*
+The example would output *I'm the best best best!*
 
 ### plural
 
