@@ -1,5 +1,9 @@
 # Twig extensions
 
+[![Codacy](https://img.shields.io/codacy/c6b23b6527bd407092763cace324ef4a.svg)](https://www.codacy.com/app/vojtasvoboda/oc-twigextensions-plugin)
+[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/g/vojtasvoboda/oc-twigextensions-plugin.svg)](https://scrutinizer-ci.com/g/vojtasvoboda/oc-twigextensions-plugin/?branch=master)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-twigextensions-plugin/blob/master/LICENSE.md)
+
 Twig extensions plugin for OctoberCMS. No other plugin dependencies.
 
 ## Installation
@@ -260,3 +264,17 @@ Use the localizedcurrency filter to format a currency value into a localized str
 
 - currency: The 3-letter ISO 4217 currency code indicating the currency to use.
 - locale: The locale used for the format. If NULL is given, Twig will use Locale::getDefault()
+
+## Future plans
+
+[ ] Add checkboxes for each function group
+
+**Feel free to send pullrequest!**
+
+## Contributing
+
+Please send Pull Request to master branch.
+
+## License
+
+Twig extensions plugin is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT) same as OctoberCMS platform.
