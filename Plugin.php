@@ -24,7 +24,7 @@ class Plugin extends PluginBase
             'name'        => 'Twig Extensions',
             'description' => 'Add more Twig filters to your templates.',
             'author'      => 'Vojta Svoboda',
-            'icon'        => 'icon-plus'
+            'icon'        => 'icon-plus',
         ];
     }
 
@@ -44,13 +44,12 @@ class Plugin extends PluginBase
         $filters = [];
         $functions = [];
 
-        // add StringLoader
-        $stringLoaderExtension = new \Twig_Extension_StringLoader;
-        $stringLoaderFunctions = $stringLoaderExtension->getFunctions();
-
+        // add String Loader functions
+        $stringLoader = new \Twig_Extension_StringLoader;
+        $stringLoaderFunc = $stringLoader->getFunctions();
         $functions += [
-          'template_from_string' => function($template) use ($twig, $stringLoaderFunctions) {
-            $callable = $stringLoaderFunctions['0']->getCallable();
+          'template_from_string' => function($template) use ($twig, $stringLoaderFunc) {
+            $callable = $stringLoaderFunc['0']->getCallable();
             return $callable($twig, $template);
           }
         ];

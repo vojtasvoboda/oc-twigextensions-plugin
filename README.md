@@ -4,11 +4,11 @@
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/g/vojtasvoboda/oc-twigextensions-plugin.svg)](https://scrutinizer-ci.com/g/vojtasvoboda/oc-twigextensions-plugin/?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-twigextensions-plugin/blob/master/LICENSE.md)
 
-Twig extensions plugin for OctoberCMS. No other plugin dependencies.
+Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies.
 
 ## Installation
 
-Just install VojtaSvoboda.TwigExtensions plugin a you can use new added plugin at your templates:
+Just install VojtaSvoboda.TwigExtensions plugin a you can use new added filters/functions at your templates:
 
 ```
 <h1 class="heading">{{ article.heading | uppercase }}</h1>
@@ -22,20 +22,17 @@ Just install VojtaSvoboda.TwigExtensions plugin a you can use new added plugin a
 
 ## Available functions
 
-template_from_string
+[template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html)
 
-## Functions
+### template\_from\_string
 
-Below are listed all new available functions.
-
-### template_from_string
-
-The template_from_string function loads a template from a string:
+Function loads a template from a string.
 
 ```
 {% set name = 'John' %}
 {{ include(template_from_string("Hello {{ name }}")) }}
 {{ include(template_from_string("Hurry up it is: {{ "now"|date("m/d/Y") }}")) }}
+```
 
 ## Available filters
 
@@ -55,7 +52,7 @@ The example would output *Posted at 04.01.2016 22:57:42*. See [more format param
 
 ### uppercase
 
-Make a string uppercase
+Make a string uppercase.
 
 ```
 Hello I'm {{ 'Jack' | uppercase }}
@@ -65,7 +62,7 @@ The example would output *Hello I'm JACK*.
 
 ### lowercase
 
-Make a string lowercase
+Make a string lowercase.
 
 ```
 Hello I'm {{ 'JACK' | lowercase }}
@@ -75,7 +72,7 @@ The example would output *Hello I'm jack*.
 
 ### ucfirst
 
-Make a string's first character uppercase
+Make a string's first character uppercase.
 
 ```
 Hello I'm {{ 'jack' | ucfirst }}
@@ -85,7 +82,7 @@ The example would output *Hello I'm Jack*.
 
 ### lcfirst
 
-Make a string's first character lowercase
+Make a string's first character lowercase.
 
 ```
 Hello I'm {{ 'Jack' | lcfirst }}
@@ -95,7 +92,7 @@ The example would output *Hello I'm jack*.
 
 ### ltrim
 
-Strip whitespace (or other characters) from the beginning of a string
+Strip whitespace (or other characters) from the beginning of a string.
 
 ```
 Hello I'm {{ ' jack' | ltrim }}
@@ -115,7 +112,7 @@ The example would output *Hello I'm jack* without whitespaces from the end.
 
 ### str_repeat
 
-Repeat a string
+Repeat a string.
 
 ```
 I'm the {{ 'best' | str_repeat(3) }}!
@@ -135,7 +132,7 @@ The example would output *You have 1 new mail* or *You have 3 new mails* - depen
 
 ### truncate
 
-Use the truncate filter to cut off a string after limit is reached
+Use the truncate filter to cut off a string after limit is reached.
 
 ```
 {{ "Hello World!" | truncate(5) }}
@@ -194,7 +191,7 @@ adipiscing
 
 ### shuffle
 
-Shuffle an array
+Shuffle an array.
 
 ```
 {{ songs | shuffle }}
