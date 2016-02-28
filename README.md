@@ -20,10 +20,27 @@ Just install VojtaSvoboda.TwigExtensions plugin a you can use new added plugin a
 </p>
 ```
 
+## Available functions
+
+template_from_string
+
+## Functions
+
+Below are listed all new available functions.
+
+### template_from_string
+
+The template_from_string function loads a template from a string:
+
+```
+{% set name = 'John' %}
+{{ include(template_from_string("Hello {{ name }}")) }}
+{{ include(template_from_string("Hurry up it is: {{ "now"|date("m/d/Y") }}")) }}
+
 ## Available filters
 
-strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat, 
-plural, truncate, wordwrap, shuffle, time_diff, localizeddate, localizednumber, 
+strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
+plural, truncate, wordwrap, shuffle, time_diff, localizeddate, localizednumber,
 localizedcurrency
 
 ### strftime

@@ -42,6 +42,18 @@ class Plugin extends PluginBase
     {
         $twig = App::make('twig.environment');
         $filters = [];
+        $functions = [];
+
+        // add StringLoader
+        $stringLoaderExtension = new \Twig_Extension_StringLoader;
+        $stringLoaderFunctions = $stringLoaderExtension->getFunctions();
+
+        $functions += [
+          'template_from_string' => function($template) use ($twig, $stringLoaderFunctions) {
+            $callable = $stringLoaderFunctions['0']->getCallable();
+            return $callable($twig, $template);
+          }
+        ];
 
         // add Text extensions
         $textExtension = new \Twig_Extensions_Extension_Text;
@@ -131,7 +143,8 @@ class Plugin extends PluginBase
         ];
 
         return [
-            'filters' => $filters
+            'filters' => $filters,
+            'functions' => $functions
         ];
     }
 }
