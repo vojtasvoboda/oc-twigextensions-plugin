@@ -48,10 +48,10 @@ class Plugin extends PluginBase
         $stringLoader = new \Twig_Extension_StringLoader;
         $stringLoaderFunc = $stringLoader->getFunctions();
         $functions += [
-          'template_from_string' => function($template) use ($twig, $stringLoaderFunc) {
-            $callable = $stringLoaderFunc['0']->getCallable();
-            return $callable($twig, $template);
-          }
+            'template_from_string' => function($template) use ($twig, $stringLoaderFunc) {
+                $callable = $stringLoaderFunc['0']->getCallable();
+                return $callable($twig, $template);
+            }
         ];
 
         // add Text extensions
