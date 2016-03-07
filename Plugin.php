@@ -21,10 +21,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Twig Extensions',
+            'name' => 'Twig Extensions',
             'description' => 'Add more Twig filters to your templates.',
-            'author'      => 'Vojta Svoboda',
-            'icon'        => 'icon-plus',
+            'author' => 'Vojta Svoboda',
+            'icon' => 'icon-plus',
         ];
     }
 
@@ -116,13 +116,13 @@ class Plugin extends PluginBase
                 return strftime($format, $timeObj->getTimestamp());
             },
             'uppercase' => function($string) {
-                return strtoupper($string);
+                return mb_convert_case($string, MB_CASE_UPPER, "UTF-8");
             },
             'lowercase' => function($string) {
-                return strtolower($string);
+                return mb_convert_case($string, MB_CASE_LOWER, "UTF-8");
             },
             'ucfirst' => function($string) {
-                return ucfirst($string);
+                return mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
             },
             'lcfirst' => function($string) {
                 return lcfirst($string);
