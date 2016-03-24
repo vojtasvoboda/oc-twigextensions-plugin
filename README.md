@@ -323,7 +323,8 @@ Use the localizedcurrency filter to format a currency value into a localized str
 
 ## Future plans
 
-[ ] Add checkboxes for each function group
+- [x] Add Unit tests
+- [ ] Add checkboxes for each function group
 
 **Feel free to send pullrequest!**
 
