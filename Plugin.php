@@ -4,6 +4,11 @@ use App;
 use Backend;
 use Carbon\Carbon;
 use System\Classes\PluginBase;
+use Twig_Extension_StringLoader;
+use Twig_Extensions_Extension_Array;
+use Twig_Extensions_Extension_Date;
+use Twig_Extensions_Extension_Intl;
+use Twig_Extensions_Extension_Text;
 
 /**
  * Twig Extensions Plugin
@@ -40,77 +45,158 @@ class Plugin extends PluginBase
      */
     public function registerMarkupTags()
     {
-        $twig = App::make('twig.environment');
         $filters = [];
         $functions = [];
 
+        // init Twig
+        $twig = App::make('twig.environment');
+
         // add String Loader functions
-        $stringLoader = new \Twig_Extension_StringLoader;
-        $stringLoaderFunc = $stringLoader->getFunctions();
-        $functions += [
-            'template_from_string' => function($template) use ($twig, $stringLoaderFunc) {
-                $callable = $stringLoaderFunc['0']->getCallable();
-                return $callable($twig, $template);
-            }
-        ];
+        $functions += $this->getStringLoaderFunctions($twig);
 
         // add Text extensions
-        $textExtension = new \Twig_Extensions_Extension_Text;
-        $textFilters = $textExtension->getFilters();
-        $filters += [
-            'truncate' => function($value, $length = 30, $preserve = false, $separator = '...') use ($twig, $textFilters) {
-                $callable = $textFilters['0']->getCallable();
-                return $callable($twig, $value, $length, $preserve, $separator);
-            },
-            'wordwrap' => function($value, $length = 80, $separator = "\n", $preserve = false) use ($twig, $textFilters) {
-                $callable = $textFilters['1']->getCallable();
-                return $callable($twig, $value, $length, $separator, $preserve);
-            }
-        ];
+        $filters += $this->getTextFilters($twig);
 
         // add Intl extensions if php5-intl installed
-        if ( class_exists('IntlDateFormatter') ) {
-            $intlExtension = new \Twig_Extensions_Extension_Intl;
-            $intlFilters = $intlExtension->getFilters();
-
-            $filters += [
-                'localizeddate' => function($date, $dateFormat = 'medium', $timeFormat = 'medium', $locale = null, $timezone = null, $format = null) use ($twig, $intlFilters) {
-                    $callable = $intlFilters['0']->getCallable();
-                    return $callable($twig, $date, $dateFormat, $timeFormat, $locale, $timezone, $format);
-                },
-                'localizednumber' => function($number, $style = 'decimal', $type = 'default', $locale = null) use ($twig, $intlFilters) {
-                    $callable = $intlFilters['1']->getCallable();
-                    return $callable($twig, $number, $style, $type, $locale);
-                },
-                'localizedcurrency' => function($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
-                    $callable = $intlFilters['2']->getCallable();
-                    return $callable($twig, $number, $currency, $locale);
-                }
-            ];
+        if (class_exists('IntlDateFormatter')) {
+            $filters += $this->getLocalizedFilters($twig);
         }
 
         // add Array extensions
-        $arrayExtension = new \Twig_Extensions_Extension_Array;
+        $filters += $this->getArrayFilters($twig);
+
+        // add Time extensions
+        $filters += $this->getTimeFilters($twig);
+
+        // add PHP functions
+        $filters += $this->getPhpFunctions();
+
+        return [
+            'filters' => $filters,
+            'functions' => $functions
+        ];
+    }
+
+    /**
+     * Returns String Loader functions
+     *
+     * @param \Twig_Environment $twig
+     *
+     * @return array
+     */
+    private function getStringLoaderFunctions($twig)
+    {
+        $stringLoader = new Twig_Extension_StringLoader;
+        $stringLoaderFunc = $stringLoader->getFunctions();
+
+        return [
+            'template_from_string' => function($template) use ($twig, $stringLoaderFunc) {
+                $callable = $stringLoaderFunc[0]->getCallable();
+                return $callable($twig, $template);
+            }
+        ];
+    }
+
+    /**
+     * Returns Text filters
+     *
+     * @param \Twig_Environment $twig
+     *
+     * @return array
+     */
+    private function getTextFilters($twig)
+    {
+        $textExtension = new Twig_Extensions_Extension_Text;
+        $textFilters = $textExtension->getFilters();
+
+        return [
+            'truncate' => function($value, $length = 30, $preserve = false, $separator = '...') use ($twig, $textFilters) {
+                $callable = $textFilters[0]->getCallable();
+                return $callable($twig, $value, $length, $preserve, $separator);
+            },
+            'wordwrap' => function($value, $length = 80, $separator = "\n", $preserve = false) use ($twig, $textFilters) {
+                $callable = $textFilters[1]->getCallable();
+                return $callable($twig, $value, $length, $separator, $preserve);
+            }
+        ];
+    }
+
+    /**
+     * Returns Intl filters
+     *
+     * @param \Twig_Environment $twig
+     *
+     * @return array
+     */
+    private function getLocalizedFilters($twig)
+    {
+        $intlExtension = new Twig_Extensions_Extension_Intl;
+        $intlFilters = $intlExtension->getFilters();
+
+        return [
+            'localizeddate' => function($date, $dateFormat = 'medium', $timeFormat = 'medium', $locale = null, $timezone = null, $format = null) use ($twig, $intlFilters) {
+                $callable = $intlFilters[0]->getCallable();
+                return $callable($twig, $date, $dateFormat, $timeFormat, $locale, $timezone, $format);
+            },
+            'localizednumber' => function($number, $style = 'decimal', $type = 'default', $locale = null) use ($twig, $intlFilters) {
+                $callable = $intlFilters[1]->getCallable();
+                return $callable($twig, $number, $style, $type, $locale);
+            },
+            'localizedcurrency' => function($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
+                $callable = $intlFilters[2]->getCallable();
+                return $callable($twig, $number, $currency, $locale);
+            }
+        ];
+    }
+
+    /**
+     * Returns Array filters
+     *
+     * @param \Twig_Environment $twig
+     *
+     * @return array
+     */
+    private function getArrayFilters($twig)
+    {
+        $arrayExtension = new Twig_Extensions_Extension_Array;
         $arrayFilters = $arrayExtension->getFilters();
-        $filters += [
+
+        return [
             'shuffle' => function($array) use ($twig, $arrayFilters) {
-                $callable = $arrayFilters['0']->getCallable();
+                $callable = $arrayFilters[0]->getCallable();
                 return $callable($twig, $array);
             }
         ];
+    }
 
-        // add Time extensions
-        $timeExtension = new \Twig_Extensions_Extension_Date;
+    /**
+     * Returns Date filters
+     *
+     * @param \Twig_Environment $twig
+     *
+     * @return array
+     */
+    private function getTimeFilters($twig)
+    {
+        $timeExtension = new Twig_Extensions_Extension_Date;
         $timeFilters = $timeExtension->getFilters();
-        $filters += [
+
+        return [
             'time_diff' => function($date, $now = null) use ($twig, $timeFilters) {
-                $callable = $timeFilters['0']->getCallable();
+                $callable = $timeFilters[0]->getCallable();
                 return $callable($twig, $date, $now);
             }
         ];
+    }
 
-        // add PHP functions
-        $filters += [
+    /**
+     * Returns plain PHP functions
+     *
+     * @return array
+     */
+    private function getPhpFunctions()
+    {
+        return [
             'strftime' => function($time, $format = '%d.%m.%Y %H:%M:%S') {
                 $timeObj = new Carbon($time);
                 return strftime($format, $timeObj->getTimestamp());
@@ -139,11 +225,6 @@ class Plugin extends PluginBase
             'plural' => function($string, $count = 2) {
                 return str_plural($string, $count);
             }
-        ];
-
-        return [
-            'filters' => $filters,
-            'functions' => $functions
         ];
     }
 }
