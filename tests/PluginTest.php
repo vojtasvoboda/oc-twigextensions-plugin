@@ -184,4 +184,34 @@ class PluginTest extends PluginTestCase
         $twigTemplate = $twig->createTemplate($template);
         $this->assertEquals($twigTemplate->render([]), 'mails');
     }
+
+    public function testStrpadFunction()
+    {
+        $twig = $this->getTwig();
+
+        $template = "{{ 'test' | strpad(10) }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), '   test   ');
+    }
+
+    public function testLeftpadFunction()
+    {
+        $twig = $this->getTwig();
+
+        $template = "{{ 'test' | leftpad(7) }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), '   test');
+    }
+
+    public function testRightpadFunction()
+    {
+        $twig = $this->getTwig();
+
+        $template = "{{ 'test' | rightpad(7, 'o') }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), 'testooo');
+    }
 }

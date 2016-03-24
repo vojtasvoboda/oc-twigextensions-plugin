@@ -86,7 +86,7 @@ class Plugin extends PluginBase
      */
     private function getStringLoaderFunctions($twig)
     {
-        $stringLoader = new Twig_Extension_StringLoader;
+        $stringLoader = new Twig_Extension_StringLoader();
         $stringLoaderFunc = $stringLoader->getFunctions();
 
         return [
@@ -106,7 +106,7 @@ class Plugin extends PluginBase
      */
     private function getTextFilters($twig)
     {
-        $textExtension = new Twig_Extensions_Extension_Text;
+        $textExtension = new Twig_Extensions_Extension_Text();
         $textFilters = $textExtension->getFilters();
 
         return [
@@ -130,7 +130,7 @@ class Plugin extends PluginBase
      */
     private function getLocalizedFilters($twig)
     {
-        $intlExtension = new Twig_Extensions_Extension_Intl;
+        $intlExtension = new Twig_Extensions_Extension_Intl();
         $intlFilters = $intlExtension->getFilters();
 
         return [
@@ -158,7 +158,7 @@ class Plugin extends PluginBase
      */
     private function getArrayFilters($twig)
     {
-        $arrayExtension = new Twig_Extensions_Extension_Array;
+        $arrayExtension = new Twig_Extensions_Extension_Array();
         $arrayFilters = $arrayExtension->getFilters();
 
         return [
@@ -178,7 +178,7 @@ class Plugin extends PluginBase
      */
     private function getTimeFilters($twig)
     {
-        $timeExtension = new Twig_Extensions_Extension_Date;
+        $timeExtension = new Twig_Extensions_Extension_Date();
         $timeFilters = $timeExtension->getFilters();
 
         return [
@@ -224,7 +224,16 @@ class Plugin extends PluginBase
             },
             'plural' => function($string, $count = 2) {
                 return str_plural($string, $count);
-            }
+            },
+            'strpad' => function($string, $pad_length, $pad_string = ' ') {
+                return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_BOTH);
+            },
+            'leftpad' => function($string, $pad_length, $pad_string = ' ') {
+                return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_LEFT);
+            },
+            'rightpad' => function($string, $pad_length, $pad_string = ' ') {
+                return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_RIGHT);
+            },
         ];
     }
 }

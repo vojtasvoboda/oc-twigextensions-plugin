@@ -37,8 +37,8 @@ Function loads a template from a string.
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
-plural, truncate, wordwrap, shuffle, time_diff, localizeddate, localizednumber,
-localizedcurrency
+plural, truncate, wordwrap, strpad, leftpad, rightpad, shuffle, time_diff,
+localizeddate, localizednumber, localizedcurrency
 
 ### strftime
 
@@ -187,6 +187,48 @@ m dolor sizz
 t amet, cozz  
 nsectetur zz  
 adipiscing  
+```
+
+### strpad
+
+Pad a string to a certain length with another string from both sides.
+
+```
+{{ 'xxx' | strpad(7, 'o') }}
+```
+
+This would print:
+
+```
+ooxxxoo
+```
+
+### leftpad
+
+Pad a string to a certain length with another string from left side.
+
+```
+{{ 'xxx' | leftpad(5, 'o') }}
+```
+
+This would print:
+
+```
+ooxxx
+```
+
+### rightpad
+
+Pad a string to a certain length with another string from right side.
+
+```
+{{ 'xxx' | rightpad(5, 'o') }}
+```
+
+This would print:
+
+```
+xxxoo
 ```
 
 ### shuffle
