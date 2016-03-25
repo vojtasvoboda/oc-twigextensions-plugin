@@ -326,7 +326,7 @@ Use the localizedcurrency filter to format a currency value into a localized str
 ## Future plans
 
 - [x] Add Unit tests
-- [ ] Add checkboxes for each function group
+- [ ] Create backend settings and add checkboxes for each functions/filters group
 
 **Feel free to send pullrequest!**
 
