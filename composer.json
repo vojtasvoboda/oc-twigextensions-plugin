@@ -1,5 +1,5 @@
 {
-  "name": "vojtasvoboda/twigextensions",
+  "name": "vojtasvoboda/oc-twigextensions-plugin",
   "keywords": ["twig", "truncate", "wordwrap", "shuffle", "time_diff"],
   "description": "Register more Twig filters for your templates",
   "license": "MIT",
