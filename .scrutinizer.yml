@@ -6,7 +6,6 @@ build:
         before:
             - find . -delete
             - git clone https://github.com/octobercms/october.git .
-            - composer self-update
             - composer install --no-interaction --prefer-source
             - mkdir -p ./plugins/vojtasvoboda/twigextensions
             - cd plugins/vojtasvoboda/twigextensions
