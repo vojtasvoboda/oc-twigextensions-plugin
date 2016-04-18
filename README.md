@@ -38,11 +38,12 @@ Function loads a template from a string.
 
 ### config
 
-Function transports the funtionality of the Laravel *config()* helper function to Twig.
+Function transports the funtionality of the Laravel `config()` helper function to Twig.
 
 ```
 {{ config('app.locale') }}
 ```
+The example would output the value currently stored in `app.locale`.
 See [more about the laravel helper function here](https://laravel.com/docs/5.0/configuration#accessing-configuration-values).
 
 
