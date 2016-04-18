@@ -43,8 +43,8 @@ Function transports the funtionality of the Laravel `config()` helper function t
 ```
 {{ config('app.locale') }}
 ```
-The example would output the value currently stored in `app.locale`.
-See [more about the laravel helper function here](https://laravel.com/docs/5.0/configuration#accessing-configuration-values).
+The example would output the value currently stored in `app.locale.
+See [more about the Laravel helper function here](https://laravel.com/docs/5.0/configuration#accessing-configuration-values).
 
 
 ## Available filters
