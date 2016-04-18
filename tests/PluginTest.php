@@ -4,9 +4,9 @@ namespace VojtaSvoboda\TwigExtensions\Tests;
 
 use App;
 use Carbon\Carbon;
+use Config;
 use PluginTestCase;
 use Twig_Environment;
-use Config;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -220,10 +220,12 @@ class PluginTest extends PluginTestCase
     {
         $twig = $this->getTwig();
 
-        Config::set('app.custom.key', 'test value');
-        $template = "{{ config('app.custom.key') }}";
+        $key = 'app.custom.key';
+        $value = 'test value';
+        Config::set($key, $value);
+        $template = "{{ config('" . $key . "') }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'test value');
+        $this->assertEquals($twigTemplate->render([]), $value);
     }
 }

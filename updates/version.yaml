@@ -2,3 +2,4 @@
 1.0.2: Add template_from_string function
 1.0.3: Fix uppercase, lowercase and ucfirst for UTF-8 characters
 1.0.4: Add leftpad, rightpad and strpad filters. Cover by unit tests.
+1.0.5: Add config function (thanks to Sebastian Hilger)
