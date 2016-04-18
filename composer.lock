@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "804c1f3a3a343f687f93b3e83467319f",
-    "content-hash": "5124be5d1c9f5dcee41b506a49b86310",
+    "hash": "8e79b78c411584854a196811d5d10ee8",
+    "content-hash": "75d57ef3473a530e8e9c224961ed847a",
     "packages": [
         {
             "name": "symfony/polyfill-mbstring",
@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "a515b102eec65c7215baa84573803c3c2c33ee09"
+                "reference": "82a923279e03c8cab7bfdcad706b1bf51afddd0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/a515b102eec65c7215baa84573803c3c2c33ee09",
-                "reference": "a515b102eec65c7215baa84573803c3c2c33ee09",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/82a923279e03c8cab7bfdcad706b1bf51afddd0f",
+                "reference": "82a923279e03c8cab7bfdcad706b1bf51afddd0f",
                 "shasum": ""
             },
             "require": {
@@ -128,7 +128,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-16 16:22:05"
+            "time": "2016-03-31 18:23:24"
         },
         {
             "name": "twig/extensions",
@@ -188,12 +188,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "2ed184ec2df1c05eb1935b13b01280965bd2c856"
+                "reference": "16cfb319708163087786c713dfe9391826114edb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/2ed184ec2df1c05eb1935b13b01280965bd2c856",
-                "reference": "2ed184ec2df1c05eb1935b13b01280965bd2c856",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/16cfb319708163087786c713dfe9391826114edb",
+                "reference": "16cfb319708163087786c713dfe9391826114edb",
                 "shasum": ""
             },
             "require": {
@@ -242,7 +242,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-01-31 08:00:54"
+            "time": "2016-04-01 06:56:37"
         }
     ],
     "packages-dev": [],

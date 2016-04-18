@@ -55,7 +55,7 @@ class Plugin extends PluginBase
         $functions += $this->getStringLoaderFunctions($twig);
 
         // add Config function
-        $functions += $this->getConfig();
+        $functions += $this->getConfigFunction();
 
         // add Text extensions
         $filters += $this->getTextFilters($twig);
@@ -245,11 +245,11 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    private function getConfig()
+    private function getConfigFunction()
     {
         return [
-            'config' => function($key) {
-                return config($key);
+            'config' => function($key = null, $default = null) {
+                return config($key, $default);
             },
         ];
     }

@@ -36,6 +36,16 @@ Function loads a template from a string.
 {{ include(template_from_string("Hurry up it is: {{ "now"|date("m/d/Y") }}")) }}
 ```
 
+### config
+
+Function transports the funtionality of the Laravel *config()* helper function to Twig.
+
+```
+{{ config('app.locale') }}
+```
+See [more about the laravel helper function here](https://laravel.com/docs/5.0/configuration#accessing-configuration-values).
+
+
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
