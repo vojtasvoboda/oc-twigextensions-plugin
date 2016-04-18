@@ -54,6 +54,9 @@ class Plugin extends PluginBase
         // add String Loader functions
         $functions += $this->getStringLoaderFunctions($twig);
 
+        // add Config function
+        $functions += $this->getConfigFunction();
+
         // add Text extensions
         $filters += $this->getTextFilters($twig);
 
@@ -233,6 +236,20 @@ class Plugin extends PluginBase
             },
             'rightpad' => function($string, $pad_length, $pad_string = ' ') {
                 return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_RIGHT);
+            },
+        ];
+    }
+
+    /**
+     * Works like the config() function
+     *
+     * @return array
+     */
+    private function getConfigFunction()
+    {
+        return [
+            'config' => function($key = null, $default = null) {
+                return config($key, $default);
             },
         ];
     }

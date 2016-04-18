@@ -6,6 +6,7 @@ use App;
 use Carbon\Carbon;
 use PluginTestCase;
 use Twig_Environment;
+use Config;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -213,5 +214,16 @@ class PluginTest extends PluginTestCase
 
         $twigTemplate = $twig->createTemplate($template);
         $this->assertEquals($twigTemplate->render([]), 'testooo');
+    }
+
+    public function testConfigFunction()
+    {
+        $twig = $this->getTwig();
+
+        Config::set('app.custom.key', 'test value');
+        $template = "{{ config('app.custom.key') }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), 'test value');
     }
 }
