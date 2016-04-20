@@ -66,7 +66,7 @@ class Plugin extends PluginBase
         }
 
         // add Array extensions
-        $filters += $this->getArrayFilters($twig);
+        $filters += $this->getArrayFilters();
 
         // add Time extensions
         $filters += $this->getTimeFilters($twig);
@@ -143,11 +143,11 @@ class Plugin extends PluginBase
             },
             'localizednumber' => function($number, $style = 'decimal', $type = 'default', $locale = null) use ($twig, $intlFilters) {
                 $callable = $intlFilters[1]->getCallable();
-                return $callable($twig, $number, $style, $type, $locale);
+                return $callable($number, $style, $type, $locale);
             },
             'localizedcurrency' => function($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
                 $callable = $intlFilters[2]->getCallable();
-                return $callable($twig, $number, $currency, $locale);
+                return $callable($number, $currency, $locale);
             }
         ];
     }
@@ -155,19 +155,17 @@ class Plugin extends PluginBase
     /**
      * Returns Array filters
      *
-     * @param \Twig_Environment $twig
-     *
      * @return array
      */
-    private function getArrayFilters($twig)
+    private function getArrayFilters()
     {
         $arrayExtension = new Twig_Extensions_Extension_Array();
         $arrayFilters = $arrayExtension->getFilters();
 
         return [
-            'shuffle' => function($array) use ($twig, $arrayFilters) {
+            'shuffle' => function($array) use ($arrayFilters) {
                 $callable = $arrayFilters[0]->getCallable();
-                return $callable($twig, $array);
+                return $callable($array);
             }
         ];
     }

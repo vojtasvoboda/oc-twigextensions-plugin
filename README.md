@@ -252,6 +252,14 @@ Shuffle an array.
 {{ songs | shuffle }}
 ```
 
+or in foreach:
+
+```
+{% for fruit in ['apple', 'banana', 'orange'] | shuffle %}
+	{{ fruit }}
+{% endfor %}
+```
+
 ### time_diff
 
 Use the time_diff filter to render the difference between a date and now.

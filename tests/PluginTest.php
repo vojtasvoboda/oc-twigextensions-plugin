@@ -79,10 +79,19 @@ class PluginTest extends PluginTestCase
 
         $template = "{{ [1, 2, 3] | shuffle }}";
 
-        /*
         $twigTemplate = $twig->createTemplate($template);
+        $this->setExpectedException('Twig_Error_Runtime', 'Array to string conversion');
         $twigTemplate->render([]);
-        */
+    }
+
+    public function testShuffleFilterForeach()
+    {
+        $twig = $this->getTwig();
+
+        $template = "{% for i in [1, 2, 3] | shuffle %}{{ i }}{% endfor %}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals(strlen($twigTemplate->render([])), 3);
     }
 
     public function testTimeDiffFunction()
