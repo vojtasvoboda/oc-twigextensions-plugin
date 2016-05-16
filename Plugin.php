@@ -26,10 +26,11 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => 'Twig Extensions',
+            'name'        => 'Twig Extensions',
             'description' => 'Add more Twig filters to your templates.',
-            'author' => 'Vojta Svoboda',
-            'icon' => 'icon-plus',
+            'author'      => 'Vojta Svoboda',
+            'icon'        => 'icon-plus',
+            'homepage'    => 'https://github.com/vojtasvoboda/oc-twigextensions-plugin'
         ];
     }
 
@@ -75,7 +76,7 @@ class Plugin extends PluginBase
         $filters += $this->getPhpFunctions();
 
         return [
-            'filters' => $filters,
+            'filters'   => $filters,
             'functions' => $functions
         ];
     }
