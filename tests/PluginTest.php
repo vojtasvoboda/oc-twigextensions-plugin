@@ -237,4 +237,27 @@ class PluginTest extends PluginTestCase
         $twigTemplate = $twig->createTemplate($template);
         $this->assertEquals($twigTemplate->render([]), $value);
     }
+
+    public function testSessionFunction()
+    {
+        $twig = $this->getTwig();
+
+        session(['my.session.key' => 'test value']);
+
+        $template = "{{ session('my.session.key') }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), 'test value');
+    }
+
+    public function testTransFunction()
+    {
+        $twig = $this->getTwig();
+        Config::set('app.locale', 'en');
+        
+        $template = "{{ trans('validation.accepted') }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), 'The :attribute must be accepted.');
+    }
 }
