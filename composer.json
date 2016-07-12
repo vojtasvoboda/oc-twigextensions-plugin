@@ -1,5 +1,6 @@
 {
   "name": "vojtasvoboda/oc-twigextensions-plugin",
+  "type": "october-plugin",
   "keywords": ["twig", "extensions", "truncate", "wordwrap", "uppercase", "lowercase", "time_diff", "leftpad", "strftime"],
   "description": "Register more Twig filters for your OctoberCMS templates",
   "license": "MIT",
