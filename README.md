@@ -38,13 +38,33 @@ Function loads a template from a string.
 
 ### config
 
-Function transports the funtionality of the Laravel `config()` helper function to Twig.
+Function transports the functionality of the Laravel `config()` helper function to Twig.
 
 ```
 {{ config('app.locale') }}
 ```
-The example would output the value currently stored in `app.locale.
-See [more about the Laravel helper function here](https://laravel.com/docs/5.0/configuration#accessing-configuration-values).
+The example would output the value currently stored in `app.locale`.
+See [more about the Laravel config helper function here](https://laravel.com/docs/5.0/configuration#accessing-configuration-values).
+
+### session
+
+Function transports the functionality of the Laravel `session()` helper function to Twig.
+
+```
+{{ session('my.session.key') }}
+```
+The example would output the value currently stored in `my.session.key`.
+See [more about the Laravel session helper function here](https://laravel.com/docs/5.0/session#session-usage).
+
+### trans
+
+Function transports the functionality of the Laravel `trans()` helper function to Twig.
+
+```
+{{ trans('acme.blog::lang.app.name') }}
+```
+The example would output a value stored in a localization file of an imaginary blog plugin.
+See [more about localization in October CMS here](https://octobercms.com/docs/plugin/localization).
 
 
 ## Available filters
