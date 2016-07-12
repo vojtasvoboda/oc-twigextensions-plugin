@@ -6,7 +6,7 @@
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/g/vojtasvoboda/oc-twigextensions-plugin.svg)](https://scrutinizer-ci.com/g/vojtasvoboda/oc-twigextensions-plugin/?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-twigextensions-plugin/blob/master/LICENSE.md)
 
-Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies.
+Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies. Tested with the latest stable build 349.
 
 ## Installation
 
@@ -24,7 +24,7 @@ Just install VojtaSvoboda.TwigExtensions plugin a you can use new added filters/
 
 ## Available functions
 
-[template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html)
+[template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html), [config](https://laravel.com/docs/5.0/configuration#accessing-configuration-values), [session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization)
 
 ### template\_from\_string
 
