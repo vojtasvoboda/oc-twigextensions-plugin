@@ -13,7 +13,7 @@
   "require": {
     "php": ">=5.4.0",
     "twig/extensions": "^1.3",
-    "symfony/translation": "^3.0",
+    "symfony/translation": "~2.7",
     "composer/installers": "~1.0"
   },
   "minimum-stability": "dev"
