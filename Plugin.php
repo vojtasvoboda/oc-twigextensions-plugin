@@ -50,7 +50,7 @@ class Plugin extends PluginBase
         $functions = [];
 
         // init Twig
-        $twig = App::make('twig.environment');
+        $twig = $this->app->make('twig.environment');
 
         // add String Loader functions
         $functions += $this->getStringLoaderFunctions($twig);
