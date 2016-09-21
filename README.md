@@ -13,7 +13,7 @@ Twig extensions plugin for OctoberCMS adds new filter and functions to your temp
 Install plugin from CMS backend or by Composer:
 
 ```
-composer require vojtasvoboda/oc-twigextensions-plugin:^1.0.7
+composer require vojtasvoboda/oc-twigextensions-plugin:^1.0.8
 ```
 
 Than you can use newly added filters/functions at your templates:
