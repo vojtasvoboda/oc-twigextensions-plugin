@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "48cd6db5f8bc4963cb150461e4e2d5da",
-    "content-hash": "55460742fc706730e894ba28291087f9",
+    "hash": "30078cc2a7b5ab67b7aea206ef56d423",
+    "content-hash": "2a4b1a566a0f79107a4088b4c9ed7163",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "a3595c5272a6f247228abb20076ed27321e4aae9"
+                "reference": "d78064c68299743e0161004f2de3a0204e33b804"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/a3595c5272a6f247228abb20076ed27321e4aae9",
-                "reference": "a3595c5272a6f247228abb20076ed27321e4aae9",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
+                "reference": "d78064c68299743e0161004f2de3a0204e33b804",
                 "shasum": ""
             },
             "require": {
@@ -65,6 +65,7 @@
                 "MODX Evo",
                 "Mautic",
                 "OXID",
+                "Plentymarkets",
                 "RadPHP",
                 "SMF",
                 "Thelia",
@@ -72,9 +73,11 @@
                 "agl",
                 "aimeos",
                 "annotatecms",
+                "attogram",
                 "bitrix",
                 "cakephp",
                 "chef",
+                "cockpit",
                 "codeigniter",
                 "concrete5",
                 "croogo",
@@ -98,16 +101,18 @@
                 "piwik",
                 "ppi",
                 "puppet",
+                "reindex",
                 "roundcube",
                 "shopware",
                 "silverstripe",
                 "symfony",
                 "typo3",
                 "wordpress",
+                "yawik",
                 "zend",
                 "zikula"
             ],
-            "time": "2016-07-05 06:18:20"
+            "time": "2016-08-13 20:53:52"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -115,12 +120,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d"
+                "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8a6bdec191138e01c92ae026e5aacb7b3e66267d",
-                "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c",
+                "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c",
                 "shasum": ""
             },
             "require": {
@@ -166,34 +171,33 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-06-29 14:58:48"
+            "time": "2016-08-30 17:06:17"
         },
         {
             "name": "symfony/translation",
-            "version": "2.8.x-dev",
+            "version": "2.7.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "32b0c824da6df065f43b0c458dc505940e98a7f1"
+                "reference": "5b78058d0b4ee0cc0bc0f3bdafe02f18cfff2a35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/32b0c824da6df065f43b0c458dc505940e98a7f1",
-                "reference": "32b0c824da6df065f43b0c458dc505940e98a7f1",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/5b78058d0b4ee0cc0bc0f3bdafe02f18cfff2a35",
+                "reference": "5b78058d0b4ee0cc0bc0f3bdafe02f18cfff2a35",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
-                "symfony/polyfill-mbstring": "~1.0"
+                "php": ">=5.3.9"
             },
             "conflict": {
                 "symfony/config": "<2.7"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.8",
-                "symfony/intl": "~2.4|~3.0.0",
-                "symfony/yaml": "~2.2|~3.0.0"
+                "symfony/config": "~2.7",
+                "symfony/intl": "~2.4",
+                "symfony/yaml": "~2.2"
             },
             "suggest": {
                 "psr/log": "To use logging capability in translator",
@@ -203,7 +207,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
@@ -230,7 +234,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-30 07:20:35"
+            "time": "2016-09-06 07:26:07"
         },
         {
             "name": "twig/extensions",
@@ -290,12 +294,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "cf96ecf366eb24cfe680b62f9134b5ddc9b86818"
+                "reference": "fc9dd3cad6afde7a4027ce6b2930c624b0961fc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/cf96ecf366eb24cfe680b62f9134b5ddc9b86818",
-                "reference": "cf96ecf366eb24cfe680b62f9134b5ddc9b86818",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/fc9dd3cad6afde7a4027ce6b2930c624b0961fc7",
+                "reference": "fc9dd3cad6afde7a4027ce6b2930c624b0961fc7",
                 "shasum": ""
             },
             "require": {
@@ -344,7 +348,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-05-30 09:07:11"
+            "time": "2016-09-20 21:35:52"
         }
     ],
     "packages-dev": [],
