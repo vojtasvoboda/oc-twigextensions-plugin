@@ -307,7 +307,7 @@ To get a translatable output, give a Symfony\Component\Translation\TranslatorInt
 
 ### localizeddate
 
-Use the localizeddate filter to format dates into a localized string representating the date.
+Use the localizeddate filter to format dates into a localized string representating the date. Note that **php5-intl extension** has to be installed!
 
 ```
 {{ post.published_at | localizeddate('medium', 'none', locale) }}
@@ -329,7 +329,7 @@ The localizeddate filter accepts strings (it must be in a format supported by th
 
 ### localizednumber
 
-Use the localizednumber filter to format numbers into a localized string representating the number.
+Use the localizednumber filter to format numbers into a localized string representating the number. Note that **php5-intl extension** has to be installed!
 
 ```
 {{ product.quantity | localizednumber }}
@@ -357,7 +357,7 @@ Internally, Twig uses the PHP NumberFormatter::create() function for the number.
 
 ### localizedcurrency
 
-Use the localizedcurrency filter to format a currency value into a localized string.
+Use the localizedcurrency filter to format a currency value into a localized string. Note that **php5-intl extension** has to be installed!
 
 ```
 {{ product.price | localizedcurrency('EUR') }}
