@@ -5,3 +5,4 @@
 1.0.5: Add config function (thanks to Sebastian Hilger)
 1.0.6: Fix localizednumber and localizedcurrency filters (thanks to Vita Zoubek)
 1.0.7: Add the session() and trans() helper functions (thanks to Sebastian Hilger)
+1.0.8: Plugin can be installed over Composer.

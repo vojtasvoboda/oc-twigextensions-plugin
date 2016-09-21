@@ -10,7 +10,13 @@ Twig extensions plugin for OctoberCMS adds new filter and functions to your temp
 
 ## Installation
 
-Just install VojtaSvoboda.TwigExtensions plugin a you can use new added filters/functions at your templates:
+Install plugin from CMS backend or by Composer:
+
+```
+composer require vojtasvoboda/oc-twigextensions-plugin:^1.0.7
+```
+
+Than you can use newly added filters/functions at your templates:
 
 ```
 <h1 class="heading">{{ article.heading | uppercase }}</h1>
