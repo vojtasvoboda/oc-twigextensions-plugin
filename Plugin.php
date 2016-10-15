@@ -11,8 +11,7 @@ use Twig_Extensions_Extension_Intl;
 use Twig_Extensions_Extension_Text;
 
 /**
- * Twig Extensions Plugin
- * - add more Twig filters to your template
+ * Twig Extensions Plugin.
  *
  * @see http://twig.sensiolabs.org/doc/extensions/index.html#extensions-install
  */
@@ -30,12 +29,12 @@ class Plugin extends PluginBase
             'description' => 'Add more Twig filters to your templates.',
             'author'      => 'Vojta Svoboda',
             'icon'        => 'icon-plus',
-            'homepage'    => 'https://github.com/vojtasvoboda/oc-twigextensions-plugin'
+            'homepage'    => 'https://github.com/vojtasvoboda/oc-twigextensions-plugin',
         ];
     }
 
     /**
-     * Add Twig extensions
+     * Add Twig extensions.
      *
      * @see Text extensions http://twig.sensiolabs.org/doc/extensions/text.html
      * @see Intl extensions http://twig.sensiolabs.org/doc/extensions/intl.html
@@ -64,6 +63,9 @@ class Plugin extends PluginBase
         // add Trans function
         $functions += $this->getTransFunction();
 
+        // add var_dump function
+        $functions += $this->getVarDumpFunction();
+
         // add Text extensions
         $filters += $this->getTextFilters($twig);
 
@@ -83,12 +85,12 @@ class Plugin extends PluginBase
 
         return [
             'filters'   => $filters,
-            'functions' => $functions
+            'functions' => $functions,
         ];
     }
 
     /**
-     * Returns String Loader functions
+     * Returns String Loader functions.
      *
      * @param \Twig_Environment $twig
      *
@@ -108,7 +110,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Returns Text filters
+     * Returns Text filters.
      *
      * @param \Twig_Environment $twig
      *
@@ -132,7 +134,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Returns Intl filters
+     * Returns Intl filters.
      *
      * @param \Twig_Environment $twig
      *
@@ -160,7 +162,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Returns Array filters
+     * Returns Array filters.
      *
      * @return array
      */
@@ -178,7 +180,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Returns Date filters
+     * Returns Date filters.
      *
      * @param \Twig_Environment $twig
      *
@@ -198,7 +200,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Returns plain PHP functions
+     * Returns plain PHP functions.
      *
      * @return array
      */
@@ -242,11 +244,15 @@ class Plugin extends PluginBase
             'rightpad' => function($string, $pad_length, $pad_string = ' ') {
                 return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_RIGHT);
             },
+            'var_dump' => function($expression) {
+                echo "<pre>";
+                var_dump($expression);
+            },
         ];
     }
 
     /**
-     * Works like the config() helper function
+     * Works like the config() helper function.
      *
      * @return array
      */
@@ -260,7 +266,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Works like the session() helper function
+     * Works like the session() helper function.
      *
      * @return array
      */
@@ -274,7 +280,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Works like the trans() helper function
+     * Works like the trans() helper function.
      *
      * @return array
      */
@@ -283,6 +289,21 @@ class Plugin extends PluginBase
         return [
             'trans' => function($key = null) {
                 return trans($key);
+            },
+        ];
+    }
+
+    /**
+     * Dumps information about a variable.
+     *
+     * @return array
+     */
+    private function getVarDumpFunction()
+    {
+        return [
+            'var_dump' => function($expression) {
+                echo "<pre>";
+                var_dump($expression);
             },
         ];
     }

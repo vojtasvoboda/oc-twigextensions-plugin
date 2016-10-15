@@ -30,7 +30,7 @@ Than you can use newly added filters/functions at your templates:
 
 ## Available functions
 
-[template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html), [config](https://laravel.com/docs/5.0/configuration#accessing-configuration-values), [session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization)
+[template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html), [config](https://laravel.com/docs/5.0/configuration#accessing-configuration-values), [session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization), [var_dump](http://php.net/manual/en/function.var-dump.php)
 
 ### template\_from\_string
 
@@ -72,12 +72,19 @@ Function transports the functionality of the Laravel `trans()` helper function t
 The example would output a value stored in a localization file of an imaginary blog plugin.
 See [more about localization in October CMS here](https://octobercms.com/docs/plugin/localization).
 
+### var_dump
+
+Dumps information about a variable. Can be also used as filter.
+
+```
+{{ var_dump(users) }}
+```
 
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
 plural, truncate, wordwrap, strpad, leftpad, rightpad, shuffle, time_diff,
-localizeddate, localizednumber, localizedcurrency
+localizeddate, localizednumber, localizedcurrency, var_dump
 
 ### strftime
 
@@ -367,6 +374,14 @@ Use the localizedcurrency filter to format a currency value into a localized str
 
 - currency: The 3-letter ISO 4217 currency code indicating the currency to use.
 - locale: The locale used for the format. If NULL is given, Twig will use Locale::getDefault()
+
+### var_dump
+
+Dumps information about a variable.
+
+```
+{{ users | var_dump }}
+```
 
 ## Future plans
 
