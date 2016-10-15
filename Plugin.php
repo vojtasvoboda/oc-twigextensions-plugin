@@ -245,8 +245,11 @@ class Plugin extends PluginBase
                 return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_RIGHT);
             },
             'var_dump' => function($expression) {
-                echo "<pre>";
+                ob_start();
                 var_dump($expression);
+                $result = ob_get_clean();
+
+                return $result;
             },
         ];
     }
@@ -302,8 +305,11 @@ class Plugin extends PluginBase
     {
         return [
             'var_dump' => function($expression) {
-                echo "<pre>";
+                ob_start();
                 var_dump($expression);
+                $result = ob_get_clean();
+
+                return $result;
             },
         ];
     }

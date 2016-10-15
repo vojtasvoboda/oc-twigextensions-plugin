@@ -232,7 +232,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ var_dump('test') }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), "<pre>string(4) \"test\"\n");
+        $this->assertContains('string(4) "test"', $twigTemplate->render([]));
     }
 
     public function testVardumpFilter()
@@ -242,7 +242,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ 'test' | var_dump }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), "<pre>string(4) \"test\"\n");
+        $this->assertContains('string(4) "test"', $twigTemplate->render([]));
     }
 
     public function testConfigFunction()

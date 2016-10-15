@@ -77,7 +77,7 @@ See [more about localization in October CMS here](https://octobercms.com/docs/pl
 Dumps information about a variable. Can be also used as filter.
 
 ```
-{{ var_dump(users) }}
+<pre>{{ var_dump(users) }}</pre>
 ```
 
 ## Available filters
@@ -380,7 +380,7 @@ Use the localizedcurrency filter to format a currency value into a localized str
 Dumps information about a variable.
 
 ```
-{{ users | var_dump }}
+<pre>{{ users | var_dump }}</pre>
 ```
 
 ## Future plans
