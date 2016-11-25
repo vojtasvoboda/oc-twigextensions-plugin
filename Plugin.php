@@ -80,6 +80,9 @@ class Plugin extends PluginBase
         // add Time extensions
         $filters += $this->getTimeFilters($twig);
 
+        // add Mail filters
+        $filters += $this->getMailFilters();
+
         // add PHP functions
         $filters += $this->getPhpFunctions();
 
@@ -200,6 +203,20 @@ class Plugin extends PluginBase
     }
 
     /**
+     * Returns mail filters.
+     *
+     * @return array
+     */
+    private function getMailFilters()
+    {
+        return [
+            'mailto' => function($string, $link = true, $protected = true) {
+                return $this->hideEmail($string, $link, $protected);
+            }
+        ];
+    }
+
+    /**
      * Returns plain PHP functions.
      *
      * @return array
@@ -243,6 +260,9 @@ class Plugin extends PluginBase
             },
             'rightpad' => function($string, $pad_length, $pad_string = ' ') {
                 return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_RIGHT);
+            },
+            'rtl' => function($string) {
+                return strrev($string);
             },
             'var_dump' => function($expression) {
                 ob_start();
@@ -312,5 +332,42 @@ class Plugin extends PluginBase
                 return $result;
             },
         ];
+    }
+
+    /**
+     * Create protected link with mailto:
+     *
+     * @param string $email Email to render.
+     * @param bool $link If email should be rendered as link.
+     * @param bool $protected If email should be protected.
+     *
+     * @see http://www.maurits.vdschee.nl/php_hide_email/
+     *
+     * @return string
+     */
+    private function hideEmail($email, $link, $protected)
+    {
+        // if we want just unprotected link
+        if (!$protected) {
+            return $link ? '<a href="mailto:' . $email . '">' . $email . '</a>' : $email;
+        }
+
+        // turn on protection
+        $character_set = '+-.0123456789@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
+        $key = str_shuffle($character_set);
+        $cipher_text = '';
+        $id = 'e' . rand(1, 999999999);
+        for ($i = 0; $i < strlen($email); $i += 1) $cipher_text .= $key[strpos($character_set, $email[$i])];
+        $script = 'var a="' . $key . '";var b=a.split("").sort().join("");var c="' . $cipher_text . '";var d="";';
+        $script .= 'for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));';
+        if ($link) {
+            $script .= 'document.getElementById("' . $id . '").innerHTML="<a href=\\"mailto:"+d+"\\">"+d+"</a>"';
+        } else {
+            $script .= 'document.getElementById("' . $id . '").innerHTML=d';
+        }
+        $script = "eval(\"" . str_replace(array("\\", '"'), array("\\\\", '\"'), $script) . "\")";
+        $script = '<script type="text/javascript">/*<![CDATA[*/' . $script . '/*]]>*/</script>';
+
+        return '<span id="' . $id . '">[javascript protected email address]</span>' . $script;
     }
 }
