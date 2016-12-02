@@ -210,8 +210,8 @@ class Plugin extends PluginBase
     private function getMailFilters()
     {
         return [
-            'mailto' => function($string, $link = true, $protected = true) {
-                return $this->hideEmail($string, $link, $protected);
+            'mailto' => function($string, $link = true, $protected = true, $text = null) {
+                return $this->hideEmail($string, $link, $protected, $text);
             }
         ];
     }
@@ -340,16 +340,23 @@ class Plugin extends PluginBase
      * @param string $email Email to render.
      * @param bool $link If email should be rendered as link.
      * @param bool $protected If email should be protected.
+     * @param string $text Link text. Render email by default.
      *
      * @see http://www.maurits.vdschee.nl/php_hide_email/
      *
      * @return string
      */
-    private function hideEmail($email, $link, $protected)
+    private function hideEmail($email, $link = true, $protected = true, $text = null)
     {
+        // email link text
+        $linkText = $email;
+        if ($text !== null) {
+            $linkText = $text;
+        }
+
         // if we want just unprotected link
         if (!$protected) {
-            return $link ? '<a href="mailto:' . $email . '">' . $email . '</a>' : $email;
+            return $link ? '<a href="mailto:' . $email . '">' . $linkText . '</a>' : $linkText;
         }
 
         // turn on protection
@@ -360,10 +367,14 @@ class Plugin extends PluginBase
         for ($i = 0; $i < strlen($email); $i += 1) $cipher_text .= $key[strpos($character_set, $email[$i])];
         $script = 'var a="' . $key . '";var b=a.split("").sort().join("");var c="' . $cipher_text . '";var d="";';
         $script .= 'for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));';
+        $script .= 'var y = d;';
+        if ($text !== null) {
+            $script .= 'var y = "'.$text.'";';
+        }
         if ($link) {
-            $script .= 'document.getElementById("' . $id . '").innerHTML="<a href=\\"mailto:"+d+"\\">"+d+"</a>"';
+            $script .= 'document.getElementById("' . $id . '").innerHTML="<a href=\\"mailto:"+d+"\\">"+y+"</a>"';
         } else {
-            $script .= 'document.getElementById("' . $id . '").innerHTML=d';
+            $script .= 'document.getElementById("' . $id . '").innerHTML=y';
         }
         $script = "eval(\"" . str_replace(array("\\", '"'), array("\\\\", '\"'), $script) . "\")";
         $script = '<script type="text/javascript">/*<![CDATA[*/' . $script . '/*]]>*/</script>';
