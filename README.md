@@ -83,7 +83,7 @@ Dumps information about a variable. Can be also used as filter.
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
-plural, truncate, wordwrap, strpad, leftpad, rightpad, shuffle, time_diff,
+plural, truncate, wordwrap, strpad, leftpad, rightpad, rtl, shuffle, time_diff,
 localizeddate, localizednumber, localizedcurrency, mailto, var_dump
 
 ### strftime
@@ -275,6 +275,20 @@ This would print:
 
 ```
 xxxoo
+```
+
+### rtl
+
+Reverse a string.
+
+```
+{{ 'Hello world!' | rtl }}
+```
+
+This would print:
+
+```
+!dlrow olleH
 ```
 
 ### shuffle
