@@ -4,7 +4,7 @@
 [![HHVM Status](https://img.shields.io/hhvm/vojtasvoboda/oc-twigextensions-plugin/master.svg)](http://hhvm.h4cc.de/package/vojtasvoboda/oc-twigextensions-plugin)
 [![Codacy](https://img.shields.io/codacy/c6b23b6527bd407092763cace324ef4a.svg)](https://www.codacy.com/app/vojtasvoboda/oc-twigextensions-plugin)
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/g/vojtasvoboda/oc-twigextensions-plugin.svg)](https://scrutinizer-ci.com/g/vojtasvoboda/oc-twigextensions-plugin/?branch=master)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-twigextensions-plugin/blob/master/LICENSE.md)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-twigextensions-plugin/blob/master/LICENSE)
 
 Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies. Tested with the latest stable OctoberCMS build 382.
 
@@ -30,17 +30,7 @@ Than you can use newly added filters/functions at your templates:
 
 ## Available functions
 
-[template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html), [config](https://laravel.com/docs/5.0/configuration#accessing-configuration-values), [session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization), [var_dump](http://php.net/manual/en/function.var-dump.php)
-
-### template\_from\_string
-
-Function loads a template from a string.
-
-```
-{% set name = 'John' %}
-{{ include(template_from_string("Hello {{ name }}")) }}
-{{ include(template_from_string("Hurry up it is: {{ "now"|date("m/d/Y") }}")) }}
-```
+[config](https://laravel.com/docs/5.0/configuration#accessing-configuration-values), [session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization), [var_dump](http://php.net/manual/en/function.var-dump.php), [template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html)
 
 ### config
 
@@ -78,6 +68,16 @@ Dumps information about a variable. Can be also used as filter.
 
 ```
 <pre>{{ var_dump(users) }}</pre>
+```
+
+### template\_from\_string
+
+Function loads a template from a string.
+
+```
+{% set name = 'John' %}
+{{ include(template_from_string("Hello {{ name }}")) }}
+{{ include(template_from_string("Hurry up it is: {{ "now"|date("m/d/Y") }}")) }}
 ```
 
 ## Available filters
@@ -429,16 +429,9 @@ Dumps information about a variable.
 <pre>{{ users | var_dump }}</pre>
 ```
 
-## Future plans
-
-- [x] Add Unit tests
-- [ ] Create backend settings and add checkboxes for each functions/filters group
-
-**Feel free to send pullrequest!**
-
 ## Contributing
 
-Please send Pull Request to master branch.
+**Feel free to send pullrequest!** Please, send Pull Request to master branch.
 
 ## License
 
