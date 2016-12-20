@@ -9,3 +9,4 @@
 1.0.9: Add var_dump filter and function.
 1.0.10: Remove pre tag from var_dump
 1.0.11: Add mailto filter for rendering encrypted email addresses.
+1.0.12: Add mailto text parameter and rtl filter.
