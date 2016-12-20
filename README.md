@@ -83,7 +83,7 @@ Dumps information about a variable. Can be also used as filter.
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
-plural, truncate, wordwrap, strpad, leftpad, rightpad, shuffle, time_diff,
+plural, truncate, wordwrap, strpad, leftpad, rightpad, rtl, shuffle, time_diff,
 localizeddate, localizednumber, localizedcurrency, mailto, var_dump
 
 ### strftime
@@ -277,6 +277,20 @@ This would print:
 xxxoo
 ```
 
+### rtl
+
+Reverse a string.
+
+```
+{{ 'Hello world!' | rtl }}
+```
+
+This would print:
+
+```
+!dlrow olleH
+```
+
 ### shuffle
 
 Shuffle an array.
@@ -397,13 +411,15 @@ which will be rendered to page as normal
 
 PHP encrypts your email address and generates the JavaScript that decrypts it. Most bots can't execute JavaScript and that is what makes this work. A visitors of your web page will not notice that you used this script as long as they has JavaScript enabled. The visitors will see "[javascript protected email address]" instead of the email address if they has JavaScript disabled.
 
-You can also use additional filter parameters
+#### Filter parameters
 
 ```
-{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, true) }}
+{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, true, 'Let me know') }}
 ```
 
-Where first parameter means "returns email with mailto link" and you can set it to false. Second parameter means "encryption is enabled".
+- first boolean parameter = returns email clickable (with link)
+- second boolean parameter = encryption is enabled
+- third string parameter = link text (not encrypted!)
 
 ### var_dump
 

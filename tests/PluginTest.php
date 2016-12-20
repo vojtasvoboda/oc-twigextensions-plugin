@@ -225,6 +225,52 @@ class PluginTest extends PluginTestCase
         $this->assertEquals($twigTemplate->render([]), 'testooo');
     }
 
+    public function testRtlFunction()
+    {
+        $twig = $this->getTwig();
+
+        $template = "{{ 'Hello world!' | rtl }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), '!dlrow olleH');
+    }
+
+    public function testMailtoFilter()
+    {
+        $twig = $this->getTwig();
+
+        // same as mailto(true, true)
+        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto }}";
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertNotContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertContains('mailto:', $twigTemplate->render([]));
+
+        // mailto(false, false) eg. without link and unprotected
+        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, false) }}";
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertNotContains('mailto:', $twigTemplate->render([]));
+
+        // mailto(true, false) eg. with link but unprotected
+        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, false) }}";
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertContains('mailto', $twigTemplate->render([]));
+
+        // mailto(false, true) eg. without link and protected
+        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, true) }}";
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertNotContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertNotContains('mailto', $twigTemplate->render([]));
+
+        // mailto(true, true, 'Let me know') eg. with link, protected and with non-crypted text
+        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, true, 'Let me know') }}";
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertNotContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertNotContains('mailto', $twigTemplate->render([]));
+        $this->assertContains('Let me know', $twigTemplate->render([]));
+    }
+
     public function testVardumpFunction()
     {
         $twig = $this->getTwig();
