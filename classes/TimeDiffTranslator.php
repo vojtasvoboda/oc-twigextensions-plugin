@@ -3,7 +3,7 @@
 use App;
 use October\Rain\Translation\Translator;
 
-class TranslatorProxy extends Translator
+class TimeDiffTranslator extends Translator
 {
     public function trans($id, array $parameters = [], $domain = 'messages', $locale = null)
     {
