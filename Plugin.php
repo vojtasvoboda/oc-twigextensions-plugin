@@ -9,6 +9,7 @@ use Twig_Extensions_Extension_Array;
 use Twig_Extensions_Extension_Date;
 use Twig_Extensions_Extension_Intl;
 use Twig_Extensions_Extension_Text;
+use VojtaSvoboda\TwigExtensions\Classes\TranslatorProxy;
 
 /**
  * Twig Extensions Plugin.
@@ -191,7 +192,8 @@ class Plugin extends PluginBase
      */
     private function getTimeFilters($twig)
     {
-        $timeExtension = new Twig_Extensions_Extension_Date();
+        $translator = $this->getTranslator();
+        $timeExtension = new Twig_Extensions_Extension_Date($translator);
         $timeFilters = $timeExtension->getFilters();
 
         return [
@@ -380,5 +382,20 @@ class Plugin extends PluginBase
         $script = '<script type="text/javascript">/*<![CDATA[*/' . $script . '/*]]>*/</script>';
 
         return '<span id="' . $id . '">[javascript protected email address]</span>' . $script;
+    }
+
+    /**
+     * Return Translator for time_diff().
+     *
+     * @return mixed
+     */
+    private function getTranslator()
+    {
+        $loader = $this->app->make('translation.loader');
+        $locale = $this->app->config->get('app.locale');
+        $translator = $this->app->make('VojtaSvoboda\TwigExtensions\Classes\TranslatorProxy', [$loader, $locale]);
+        $translator->setFallback($this->app->config->get('app.fallback_locale'));
+
+        return $translator;
     }
 }
