@@ -10,3 +10,4 @@
 1.0.10: Remove pre tag from var_dump
 1.0.11: Add mailto filter for rendering encrypted email addresses.
 1.0.12: Add mailto text parameter and rtl filter.
+1.0.13: Make time_diff translatable.
