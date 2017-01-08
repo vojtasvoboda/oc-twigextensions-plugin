@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Config;
 use PluginTestCase;
 use Twig_Environment;
+use VojtaSvoboda\TwigExtensions\Classes\TimeDiffTranslator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
