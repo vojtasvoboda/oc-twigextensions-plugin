@@ -82,9 +82,9 @@ Function loads a template from a string.
 
 ## Available filters
 
-strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str_repeat,
-plural, truncate, wordwrap, strpad, leftpad, rightpad, rtl, shuffle, time_diff,
-localizeddate, localizednumber, localizedcurrency, mailto, var_dump
+strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str\_repeat,
+plural, truncate, wordwrap, strpad, leftpad, rightpad, rtl, shuffle, time\_diff,
+localizeddate, localizednumber, localizedcurrency, mailto, var\_dump
 
 ### strftime
 
@@ -317,6 +317,8 @@ Use the time_diff filter to render the difference between a date and now.
 
 The example above will output a string like 4 seconds ago or in 1 month, depending on the filtered date.
 
+Output is **translatable**. All translations are stored at `/lang` folder in this plugin. If you want more locales, just copy them from [this repository](https://github.com/KnpLabs/KnpTimeBundle/tree/master/Resources/translations), replace `%count%` with `:count` and send it as pull reqest to this repository.
+
 #### Arguments
 
 - date: The date for calculate the difference from now. Can be a string or a DateTime instance.
@@ -430,6 +432,8 @@ Dumps information about a variable.
 ```
 
 ## Contributing
+
+- [ ] Fix time_diff unit test, which pass at local machine, but fails at TravisCI.
 
 **Feel free to send pullrequest!** Please, send Pull Request to master branch.
 

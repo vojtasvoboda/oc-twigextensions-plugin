@@ -9,6 +9,7 @@ use Twig_Extensions_Extension_Array;
 use Twig_Extensions_Extension_Date;
 use Twig_Extensions_Extension_Intl;
 use Twig_Extensions_Extension_Text;
+use VojtaSvoboda\TwigExtensions\Classes\TimeDiffTranslator;
 
 /**
  * Twig Extensions Plugin.
@@ -31,6 +32,18 @@ class Plugin extends PluginBase
             'icon'        => 'icon-plus',
             'homepage'    => 'https://github.com/vojtasvoboda/oc-twigextensions-plugin',
         ];
+    }
+
+    public function boot()
+    {
+        $this->app->singleton('time_diff_translator', function($app) {
+            $loader = $app->make('translation.loader');
+            $locale = $app->config->get('app.locale');
+            $translator = $app->make(TimeDiffTranslator::class, [$loader, $locale]);
+            $translator->setFallback($app->config->get('app.fallback_locale'));
+
+            return $translator;
+        });
     }
 
     /**
@@ -191,7 +204,8 @@ class Plugin extends PluginBase
      */
     private function getTimeFilters($twig)
     {
-        $timeExtension = new Twig_Extensions_Extension_Date();
+        $translator = $this->app->make('time_diff_translator');
+        $timeExtension = new Twig_Extensions_Extension_Date($translator);
         $timeFilters = $timeExtension->getFilters();
 
         return [
