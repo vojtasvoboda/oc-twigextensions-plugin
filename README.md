@@ -431,6 +431,21 @@ Dumps information about a variable.
 <pre>{{ users | var_dump }}</pre>
 ```
 
+### fileversion
+
+Forces to reload cached modified/updated asset files
+
+#### usage
+```
+<img src="{{ 'assets/images/image_file.jpg'|theme|fileversion}}" alt="an image>
+```
+
+Will return something like
+```
+<img src="https://www.example.com/themes/my-theme/assets/image_file.png?12.03.16.04.52.38" alt="an image">
+```
+See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25
+
 ## Contributing
 
 - [ ] Fix time_diff unit test, which pass at local machine, but fails at TravisCI.
