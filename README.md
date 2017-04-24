@@ -433,7 +433,7 @@ Dumps information about a variable.
 
 ### fileversion
 
-Forces to reload cached modified/updated asset files
+Forces the browser to reload cached modified/updated asset files
 
 #### usage
 ```
