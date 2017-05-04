@@ -324,8 +324,8 @@ class Plugin extends PluginBase
     private function getTransFunction()
     {
         return [
-            'trans' => function($key = null) {
-                return trans($key);
+            'trans' => function($key = null, $parameters = []) {
+                return trans($key, $parameters);
             },
         ];
     }
