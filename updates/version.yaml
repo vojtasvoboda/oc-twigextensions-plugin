@@ -13,3 +13,4 @@
 1.0.13: Make time_diff translatable.
 1.0.14: Add pt-br locale for time_diff translation (thanks to Ronaldo Ribeiro de Sousa)
 1.0.15: Add DE and HU locale (thanks to Szabó Gergő and Sebastian Hilger)
+1.0.16: Add sortbyfield filter to sorting arrays/fields by key.
