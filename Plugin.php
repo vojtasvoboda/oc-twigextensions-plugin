@@ -99,8 +99,8 @@ class Plugin extends PluginBase
         // add PHP functions
         $filters += $this->getPhpFunctions();
 
-        // add FileVersion filters
-        $filters += $this->getFileVersion();
+        // add File Version filter
+        $filters += $this->getFileRevision();
 
         return [
             'filters'   => $filters,
@@ -410,21 +410,21 @@ class Plugin extends PluginBase
      *
      * @return string
      */
-    private function getFileVersion()
+    private function getFileRevision()
     {
         return  [
-                'fileversion' => function($filename){
+                'revision' => function($filename, $format = null){
                     // Remove http/web address from the file name if there is one to load it locally
                     $prefix = url("/");
                     $filename_ = trim(preg_replace('/^' . preg_quote($prefix, '/') . '/', '', $filename), '/');
-
                     if (file_exists($filename_))
                     {
                       $timestamp = filemtime($filename_);
-                      return $filename . "?" . date ("m.d.y.H.i.s", $timestamp);
+                      $prepend = ($format) ? date($fomat, $timestamp) : $timestamp;
+                      return $filename . "?" . $prepend;
                     }else
                     {
-                      return $filename . "?";
+                      return $filename;
                     }
                 },
              ];
