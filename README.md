@@ -431,20 +431,27 @@ Dumps information about a variable.
 <pre>{{ users | var_dump }}</pre>
 ```
 
-### fileversion
+### revision
+ 
+ Force the browser to reload cached modified/updated asset files.
+ You can provide a format parameter so that the prepended timestamp get converted accordingly to the PHP date() function.
+ 
+ #### usage
+ ```
+ <img src="{{ 'assets/images/image_file.jpg'|theme|revision("m.d.y.H.i.s")}}" alt="an image>
+ ```
+ 
+ Will return something like
+ ```
+ <img src="https://www.example.com/themes/my-theme/assets/image_file.png?12.03.16.04.52.38" alt="an image">
+ ```
 
-Forces the browser to reload cached modified/updated asset files
+ See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25  
+ 
+      https://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files  
 
-#### usage
-```
-<img src="{{ 'assets/images/image_file.jpg'|theme|fileversion}}" alt="an image>
-```
-
-Will return something like
-```
-<img src="https://www.example.com/themes/my-theme/assets/image_file.png?12.03.16.04.52.38" alt="an image">
-```
-See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25
+      http://php.net/manual/en/function.date.php  
+ 
 
 ## Contributing
 
