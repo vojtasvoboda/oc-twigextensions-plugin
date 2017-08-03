@@ -406,27 +406,24 @@ class Plugin extends PluginBase
      *
      * See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25
      *
-     * @param string $filename Filename of the asset file
-     *
-     * @return string
+     * @return array
      */
     private function getFileRevision()
     {
-        return  [
-                'revision' => function($filename, $format = null){
-                    // Remove http/web address from the file name if there is one to load it locally
-                    $prefix = url("/");
-                    $filename_ = trim(preg_replace('/^' . preg_quote($prefix, '/') . '/', '', $filename), '/');
-                    if (file_exists($filename_))
-                    {
-                      $timestamp = filemtime($filename_);
-                      $prepend = ($format) ? date($fomat, $timestamp) : $timestamp;
-                      return $filename . "?" . $prepend;
-                    }else
-                    {
-                      return $filename;
-                    }
-                },
-             ];
+        return [
+            'revision' => function ($filename, $format = null) {
+                // Remove http/web address from the file name if there is one to load it locally
+                $prefix = url('/');
+                $filename_ = trim(preg_replace('/^' . preg_quote($prefix, '/') . '/', '', $filename), '/');
+                if (file_exists($filename_)) {
+                    $timestamp = filemtime($filename_);
+                    $prepend = ($format) ? date($format, $timestamp) : $timestamp;
+
+                    return $filename . "?" . $prepend;
+                }
+
+                return $filename;
+            },
+        ];
     }
 }
