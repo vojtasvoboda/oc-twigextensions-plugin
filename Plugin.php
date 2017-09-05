@@ -281,6 +281,9 @@ class Plugin extends PluginBase
             'rtl' => function($string) {
                 return strrev($string);
             },
+            'strip_tags' => function($string, $allow = '') {
+                return strip_tags($string, $allow);
+            },
             'var_dump' => function($expression) {
                 ob_start();
                 var_dump($expression);
