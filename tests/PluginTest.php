@@ -344,4 +344,14 @@ class PluginTest extends PluginTestCase
         $twigTemplate = $twig->createTemplate($template);
         $this->assertEquals($twigTemplate->render([]), 'The :attribute must be accepted.');
     }
+
+    public function testStripTagsFunction()
+    {
+        $twig = $this->getTwig();
+
+        $template = "{{ '<p><b>text</b></p>' | strip_tags('p') }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), '<p>text</p>');
+    }
 }
