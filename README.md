@@ -321,6 +321,14 @@ The example above will output a string like 4 seconds ago or in 1 month, dependi
 
 Output is **translatable**. All translations are stored at `/lang` folder in this plugin. If you want more locales, just copy them from [this repository](https://github.com/KnpLabs/KnpTimeBundle/tree/master/Resources/translations), replace `%count%` with `:count` and send it as pull reqest to this repository.
 
+### strip_tags
+
+Strip HTML and PHP tags from a string.
+
+```
+{{ '<p><b>Text</b></p>' | strip_tags('p') }}
+```
+
 #### Arguments
 
 - date: The date for calculate the difference from now. Can be a string or a DateTime instance.
