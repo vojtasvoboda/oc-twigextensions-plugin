@@ -371,4 +371,15 @@ class PluginTest extends PluginTestCase
         $twigTemplate = $twig->createTemplate($template);
         $this->assertEquals($twigTemplate->render([]), 'The :attribute must be accepted.');
     }
+
+    public function testTransFunctionWithParam()
+    {
+        $twig = $this->getTwig();
+        Config::set('app.locale', 'en');
+
+        $template = "{{ trans('backend::lang.access_log.hint', {'days': 60}) }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertContains('60 days', $twigTemplate->render([]));
+    }
 }

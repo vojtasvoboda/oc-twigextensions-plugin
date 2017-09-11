@@ -7,7 +7,7 @@
 
 Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies.
 
-Tested with the latest stable OctoberCMS build 420 (with Laravel 5.5).
+Tested with the latest stable OctoberCMS build 420 (with Laravel 5.5). For Laravel 5.4 use version 1.1.1.
 
 ## Installation
 
