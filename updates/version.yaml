@@ -15,3 +15,4 @@
 1.0.15: Add DE and HU locale (thanks to Szabó Gergő and Sebastian Hilger)
 1.1.0: Make changes for Laravel 5.5.
 1.1.1: Add revision filter
+1.1.2: Add strip_tags filter
