@@ -3,6 +3,7 @@
 use App;
 use Backend;
 use Carbon\Carbon;
+use Snilius\Twig\SortByFieldExtension;
 use System\Classes\PluginBase;
 use Twig_Extension_StringLoader;
 use Twig_Extensions_Extension_Array;
@@ -92,6 +93,9 @@ class Plugin extends PluginBase
 
         // add Time extensions
         $filters += $this->getTimeFilters($twig);
+
+        // add Sort by Field extensions
+        $filters += $this->getSortByField();
 
         // add Mail filters
         $filters += $this->getMailFilters();
@@ -215,6 +219,24 @@ class Plugin extends PluginBase
             'time_diff' => function($date, $now = null) use ($twig, $timeFilters) {
                 $callable = $timeFilters[0]->getCallable();
                 return $callable($twig, $date, $now);
+            }
+        ];
+    }
+
+    /**
+     * Returns Sort by Field filters.
+     *
+     * @return array
+     */
+    private function getSortByField()
+    {
+        $extension = new SortByFieldExtension();
+        $filters = $extension->getFilters();
+
+        return [
+            'sortbyfield' => function($array, $sort_by = null, $direction = 'asc') use ($filters) {
+                $callable = $filters[0]->getCallable();
+                return $callable($array, $sort_by, $direction);
             }
         ];
     }

@@ -471,6 +471,8 @@ http://php.net/manual/en/function.date.php
 ## Contributing
 
 - [ ] Fix time_diff unit test, which pass at local machine, but fails at TravisCI.
+- [ ] Convert PHP functions and custom code to the Twig_Extension classes.
+- [ ] Create Twig_Extension loader and load all extensions and filters as Twig_Extension automatically from config.
 
 **Feel free to send pullrequest!** Please, send Pull Request to master branch.
 

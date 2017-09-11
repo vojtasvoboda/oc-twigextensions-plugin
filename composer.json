@@ -17,7 +17,8 @@
     "php": ">=5.4.0",
     "twig/extensions": "^1.3",
     "symfony/translation": "2.7.*",
-    "composer/installers": "~1.0"
+    "composer/installers": "~1.0",
+    "snilius/twig-sort-by-field": "dev-master"
   },
   "minimum-stability": "dev",
   "scripts": {

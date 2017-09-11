@@ -31,7 +31,7 @@ class PluginTest extends PluginTestCase
 
     /**
      * Return Twig environment
-     * 
+     *
      * @return Twig_Environment
      */
     private function getTwig()
@@ -263,6 +263,23 @@ class PluginTest extends PluginTestCase
         $this->assertEquals($twigTemplate->render([]), '!dlrow olleH');
     }
 
+    public function testSortByFieldFunction()
+    {
+        $twig = $this->getTwig();
+
+        // sort by name
+        $template = "{% set data = [{'name': 'David', 'age': 31}, {'name': 'John', 'age': 28}] %}";
+        $template .= "{% for item in data | sortbyfield('name') %}{{ item.name }}{% endfor %}";
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), 'DavidJohn');
+
+        // sort by age
+        $template = "{% set data = [{'name': 'David', 'age': 31}, {'name': 'John', 'age': 28}] %}";
+        $template .= "{% for item in data | sortbyfield('age') %}{{ item.name }}{% endfor %}";
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), 'JohnDavid');
+    }
+
     public function testMailtoFilter()
     {
         $twig = $this->getTwig();
@@ -348,7 +365,7 @@ class PluginTest extends PluginTestCase
     {
         $twig = $this->getTwig();
         Config::set('app.locale', 'en');
-        
+
         $template = "{{ trans('validation.accepted') }}";
 
         $twigTemplate = $twig->createTemplate($template);
