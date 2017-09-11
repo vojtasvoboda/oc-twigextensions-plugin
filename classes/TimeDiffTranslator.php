@@ -2,8 +2,9 @@
 
 use App;
 use October\Rain\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
-class TimeDiffTranslator extends Translator
+class TimeDiffTranslator extends Translator implements TranslatorInterface
 {
     public function trans($id, array $parameters = [], $domain = 'messages', $locale = null)
     {

@@ -103,6 +103,9 @@ class Plugin extends PluginBase
         // add PHP functions
         $filters += $this->getPhpFunctions();
 
+        // add File Version filter
+        $filters += $this->getFileRevision();
+
         return [
             'filters'   => $filters,
             'functions' => $functions,
@@ -300,6 +303,9 @@ class Plugin extends PluginBase
             'rtl' => function($string) {
                 return strrev($string);
             },
+            'strip_tags' => function($string, $allow = '') {
+                return strip_tags($string, $allow);
+            },
             'var_dump' => function($expression) {
                 ob_start();
                 var_dump($expression);
@@ -416,5 +422,33 @@ class Plugin extends PluginBase
         $script = '<script type="text/javascript">/*<![CDATA[*/' . $script . '/*]]>*/</script>';
 
         return '<span id="' . $id . '">[javascript protected email address]</span>' . $script;
+    }
+
+    /**
+     * Appends this pattern: ? . {last modified date}
+     * to an assets filename to force browser to reload
+     * cached modified file.
+     *
+     * See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25
+     *
+     * @return array
+     */
+    private function getFileRevision()
+    {
+        return [
+            'revision' => function ($filename, $format = null) {
+                // Remove http/web address from the file name if there is one to load it locally
+                $prefix = url('/');
+                $filename_ = trim(preg_replace('/^' . preg_quote($prefix, '/') . '/', '', $filename), '/');
+                if (file_exists($filename_)) {
+                    $timestamp = filemtime($filename_);
+                    $prepend = ($format) ? date($format, $timestamp) : $timestamp;
+
+                    return $filename . "?" . $prepend;
+                }
+
+                return $filename;
+            },
+        ];
     }
 }

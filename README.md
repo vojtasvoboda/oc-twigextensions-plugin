@@ -1,12 +1,13 @@
 # Twig extensions
 
 [![Build Status](https://travis-ci.org/vojtasvoboda/oc-twigextensions-plugin.svg?branch=master)](https://travis-ci.org/vojtasvoboda/oc-twigextensions-plugin)
-[![HHVM Status](https://img.shields.io/hhvm/vojtasvoboda/oc-twigextensions-plugin/master.svg)](http://hhvm.h4cc.de/package/vojtasvoboda/oc-twigextensions-plugin)
 [![Codacy](https://img.shields.io/codacy/c6b23b6527bd407092763cace324ef4a.svg)](https://www.codacy.com/app/vojtasvoboda/oc-twigextensions-plugin)
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/g/vojtasvoboda/oc-twigextensions-plugin.svg)](https://scrutinizer-ci.com/g/vojtasvoboda/oc-twigextensions-plugin/?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-twigextensions-plugin/blob/master/LICENSE)
 
-Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies. Tested with the latest stable OctoberCMS build 382.
+Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies.
+
+Tested with the latest stable OctoberCMS build 420 (with Laravel 5.5).
 
 ## Installation
 
@@ -83,8 +84,8 @@ Function loads a template from a string.
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str\_repeat,
-plural, truncate, wordwrap, strpad, leftpad, rightpad, rtl, shuffle, time\_diff,
-localizeddate, localizednumber, localizedcurrency, mailto, var\_dump
+plural, truncate, wordwrap, strpad, strip_tags, leftpad, rightpad, rtl, shuffle, time\_diff,
+localizeddate, localizednumber, localizedcurrency, mailto, var\_dump, revision
 
 ### strftime
 
@@ -247,6 +248,20 @@ This would print:
 
 ```
 ooxxxoo
+```
+
+### strip_tags
+
+Strip HTML and PHP tags from a string. In first parameter you can specify allowable tags.
+
+```
+{{ '<p><b>Text</b></p>' | strip_tags('<p>') }}
+```
+
+This would return:
+
+```
+<p>Text</p>
 ```
 
 ### leftpad
@@ -430,6 +445,28 @@ Dumps information about a variable.
 ```
 <pre>{{ users | var_dump }}</pre>
 ```
+
+### revision
+ 
+Force the browser to reload cached modified/updated asset files.
+You can provide a format parameter so that the prepended timestamp get converted accordingly to the PHP date() function.
+
+#### usage
+```
+<img src="{{ 'assets/images/image_file.jpg' | theme | revision("m.d.y.H.i.s") }}" alt="an image" />
+```
+
+Will return something like
+```
+<img src="https://www.example.com/themes/my-theme/assets/image_file.png?12.03.16.04.52.38" alt="An image" />
+```
+
+See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25  
+
+https://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files  
+
+http://php.net/manual/en/function.date.php  
+ 
 
 ## Contributing
 
