@@ -85,7 +85,7 @@ Function loads a template from a string.
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str\_repeat,
-plural, truncate, wordwrap, strpad, leftpad, rightpad, rtl, shuffle, time\_diff,
+plural, truncate, wordwrap, strpad, strip_tags, leftpad, rightpad, rtl, shuffle, time\_diff,
 localizeddate, localizednumber, localizedcurrency, mailto, var\_dump, revision
 
 ### strftime
@@ -249,6 +249,20 @@ This would print:
 
 ```
 ooxxxoo
+```
+
+### strip_tags
+
+Strip HTML and PHP tags from a string. In first parameter you can specify allowable tags.
+
+```
+{{ '<p><b>Text</b></p>' | strip_tags('<p>') }}
+```
+
+This would return:
+
+```
+<p>Text</p>
 ```
 
 ### leftpad
