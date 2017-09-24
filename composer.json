@@ -15,12 +15,12 @@
   ],
   "require": {
     "php": ">=7.0",
-    "twig/extensions": "^1.5.1",
-    "symfony/translation": "3.3.6",
+    "twig/extensions": "~1.5.1",
+    "symfony/translation": "~3.3.9",
     "composer/installers": "~1.4",
     "snilius/twig-sort-by-field": "dev-master"
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "scripts": {
     "build": [
       "@composer install --no-progress --no-interaction --no-suggest",
