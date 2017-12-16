@@ -345,7 +345,7 @@ To get a translatable output, give a Symfony\Component\Translation\TranslatorInt
 
 ### localizeddate
 
-Use the localizeddate filter to format dates into a localized string representating the date. Note that **php5-intl extension** has to be installed!
+Use the localizeddate filter to format dates into a localized string representating the date. Note that **php5-intl extension**/**php7-intl extension** has to be installed!
 
 ```
 {{ post.published_at | localizeddate('medium', 'none', locale) }}
