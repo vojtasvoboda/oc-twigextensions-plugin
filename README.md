@@ -473,6 +473,8 @@ http://php.net/manual/en/function.date.php
 - [ ] Fix time_diff unit test, which pass at local machine, but fails at TravisCI.
 - [ ] Convert PHP functions and custom code to the Twig_Extension classes.
 - [ ] Create Twig_Extension loader and load all extensions and filters as Twig_Extension automatically from config.
+- [ ] New filters *ga* and *gtm* for adding GA or GTM code (Heap Analytics) - {{ 'UA-1234567' | ga }}.
+- [ ] Add [cache extension](https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/11).
 
 **Feel free to send pullrequest!** Please, send Pull Request to master branch.
 
