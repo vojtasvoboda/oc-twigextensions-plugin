@@ -21,4 +21,6 @@ before_script:
   - cd plugins/vojtasvoboda/twigextensions
   - composer install
 
-script: ../../../vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+script:
+  - ../../../vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - 

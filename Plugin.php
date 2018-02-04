@@ -42,7 +42,7 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        $this->app->singleton('time_diff_translator', function($app) {
+        $this->app->singleton('time_diff_translator', function ($app) {
             $loader = $app->make('translation.loader');
             $locale = $app->config->get('app.locale');
             $translator = $app->make(TimeDiffTranslator::class, [$loader, $locale]);
@@ -130,7 +130,7 @@ class Plugin extends PluginBase
         $stringLoaderFunc = $stringLoader->getFunctions();
 
         return [
-            'template_from_string' => function($template) use ($twig, $stringLoaderFunc) {
+            'template_from_string' => function ($template) use ($twig, $stringLoaderFunc) {
                 $callable = $stringLoaderFunc[0]->getCallable();
                 return $callable($twig, $template);
             }
@@ -150,11 +150,11 @@ class Plugin extends PluginBase
         $textFilters = $textExtension->getFilters();
 
         return [
-            'truncate' => function($value, $length = 30, $preserve = false, $separator = '...') use ($twig, $textFilters) {
+            'truncate' => function ($value, $length = 30, $preserve = false, $separator = '...') use ($twig, $textFilters) {
                 $callable = $textFilters[0]->getCallable();
                 return $callable($twig, $value, $length, $preserve, $separator);
             },
-            'wordwrap' => function($value, $length = 80, $separator = "\n", $preserve = false) use ($twig, $textFilters) {
+            'wordwrap' => function ($value, $length = 80, $separator = "\n", $preserve = false) use ($twig, $textFilters) {
                 $callable = $textFilters[1]->getCallable();
                 return $callable($twig, $value, $length, $separator, $preserve);
             }
@@ -174,15 +174,15 @@ class Plugin extends PluginBase
         $intlFilters = $intlExtension->getFilters();
 
         return [
-            'localizeddate' => function($date, $dateFormat = 'medium', $timeFormat = 'medium', $locale = null, $timezone = null, $format = null) use ($twig, $intlFilters) {
+            'localizeddate' => function ($date, $dateFormat = 'medium', $timeFormat = 'medium', $locale = null, $timezone = null, $format = null) use ($twig, $intlFilters) {
                 $callable = $intlFilters[0]->getCallable();
                 return $callable($twig, $date, $dateFormat, $timeFormat, $locale, $timezone, $format);
             },
-            'localizednumber' => function($number, $style = 'decimal', $type = 'default', $locale = null) use ($twig, $intlFilters) {
+            'localizednumber' => function ($number, $style = 'decimal', $type = 'default', $locale = null) use ($twig, $intlFilters) {
                 $callable = $intlFilters[1]->getCallable();
                 return $callable($number, $style, $type, $locale);
             },
-            'localizedcurrency' => function($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
+            'localizedcurrency' => function ($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
                 $callable = $intlFilters[2]->getCallable();
                 return $callable($number, $currency, $locale);
             }
@@ -200,7 +200,7 @@ class Plugin extends PluginBase
         $arrayFilters = $arrayExtension->getFilters();
 
         return [
-            'shuffle' => function($array) use ($arrayFilters) {
+            'shuffle' => function ($array) use ($arrayFilters) {
                 $callable = $arrayFilters[0]->getCallable();
                 return $callable($array);
             }
@@ -221,7 +221,7 @@ class Plugin extends PluginBase
         $timeFilters = $timeExtension->getFilters();
 
         return [
-            'time_diff' => function($date, $now = null) use ($twig, $timeFilters) {
+            'time_diff' => function ($date, $now = null) use ($twig, $timeFilters) {
                 $callable = $timeFilters[0]->getCallable();
                 return $callable($twig, $date, $now);
             }
@@ -239,7 +239,7 @@ class Plugin extends PluginBase
         $filters = $extension->getFilters();
 
         return [
-            'sortbyfield' => function($array, $sort_by = null, $direction = 'asc') use ($filters) {
+            'sortbyfield' => function ($array, $sort_by = null, $direction = 'asc') use ($filters) {
                 $callable = $filters[0]->getCallable();
                 return $callable($array, $sort_by, $direction);
             }
@@ -254,7 +254,7 @@ class Plugin extends PluginBase
     private function getMailFilters()
     {
         return [
-            'mailto' => function($string, $link = true, $protected = true, $text = null) {
+            'mailto' => function ($string, $link = true, $protected = true, $text = null) {
                 return $this->hideEmail($string, $link, $protected, $text);
             }
         ];
@@ -268,50 +268,50 @@ class Plugin extends PluginBase
     private function getPhpFunctions()
     {
         return [
-            'strftime' => function($time, $format = '%d.%m.%Y %H:%M:%S') {
+            'strftime' => function ($time, $format = '%d.%m.%Y %H:%M:%S') {
                 $timeObj = new Carbon($time);
                 return strftime($format, $timeObj->getTimestamp());
             },
-            'uppercase' => function($string) {
+            'uppercase' => function ($string) {
                 return mb_convert_case($string, MB_CASE_UPPER, "UTF-8");
             },
-            'lowercase' => function($string) {
+            'lowercase' => function ($string) {
                 return mb_convert_case($string, MB_CASE_LOWER, "UTF-8");
             },
-            'ucfirst' => function($string) {
+            'ucfirst' => function ($string) {
                 return mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
             },
-            'lcfirst' => function($string) {
+            'lcfirst' => function ($string) {
                 return lcfirst($string);
             },
-            'ltrim' => function($string, $charlist = " \t\n\r\0\x0B") {
+            'ltrim' => function ($string, $charlist = " \t\n\r\0\x0B") {
                 return ltrim($string, $charlist);
             },
-            'rtrim' => function($string, $charlist = " \t\n\r\0\x0B") {
+            'rtrim' => function ($string, $charlist = " \t\n\r\0\x0B") {
                 return rtrim($string, $charlist);
             },
-            'str_repeat' => function($string, $multiplier = 1) {
+            'str_repeat' => function ($string, $multiplier = 1) {
                 return str_repeat($string, $multiplier);
             },
-            'plural' => function($string, $count = 2) {
+            'plural' => function ($string, $count = 2) {
                 return str_plural($string, $count);
             },
-            'strpad' => function($string, $pad_length, $pad_string = ' ') {
+            'strpad' => function ($string, $pad_length, $pad_string = ' ') {
                 return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_BOTH);
             },
-            'leftpad' => function($string, $pad_length, $pad_string = ' ') {
+            'leftpad' => function ($string, $pad_length, $pad_string = ' ') {
                 return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_LEFT);
             },
-            'rightpad' => function($string, $pad_length, $pad_string = ' ') {
+            'rightpad' => function ($string, $pad_length, $pad_string = ' ') {
                 return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_RIGHT);
             },
-            'rtl' => function($string) {
+            'rtl' => function ($string) {
                 return strrev($string);
             },
-            'strip_tags' => function($string, $allow = '') {
+            'strip_tags' => function ($string, $allow = '') {
                 return strip_tags($string, $allow);
             },
-            'var_dump' => function($expression) {
+            'var_dump' => function ($expression) {
                 ob_start();
                 var_dump($expression);
                 $result = ob_get_clean();
@@ -329,7 +329,7 @@ class Plugin extends PluginBase
     private function getConfigFunction()
     {
         return [
-            'config' => function($key = null, $default = null) {
+            'config' => function ($key = null, $default = null) {
                 return config($key, $default);
             },
         ];
@@ -343,7 +343,7 @@ class Plugin extends PluginBase
     private function getSessionFunction()
     {
         return [
-            'session' => function($key = null) {
+            'session' => function ($key = null) {
                 return session($key);
             },
         ];
@@ -357,7 +357,7 @@ class Plugin extends PluginBase
     private function getTransFunction()
     {
         return [
-            'trans' => function($key = null, $parameters = []) {
+            'trans' => function ($key = null, $parameters = []) {
                 return trans($key, $parameters);
             },
         ];
@@ -371,7 +371,7 @@ class Plugin extends PluginBase
     private function getVarDumpFunction()
     {
         return [
-            'var_dump' => function($expression) {
+            'var_dump' => function ($expression) {
                 ob_start();
                 var_dump($expression);
                 $result = ob_get_clean();
@@ -411,7 +411,9 @@ class Plugin extends PluginBase
         $key = str_shuffle($character_set);
         $cipher_text = '';
         $id = 'e' . rand(1, 999999999);
-        for ($i = 0; $i < strlen($email); $i += 1) $cipher_text .= $key[strpos($character_set, $email[$i])];
+        for ($i = 0; $i < strlen($email); $i += 1) {
+            $cipher_text .= $key[strpos($character_set, $email[$i])];
+        }
         $script = 'var a="' . $key . '";var b=a.split("").sort().join("");var c="' . $cipher_text . '";var d="";';
         $script .= 'for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));';
         $script .= 'var y = d;';
