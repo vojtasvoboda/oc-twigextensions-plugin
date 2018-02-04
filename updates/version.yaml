@@ -18,3 +18,4 @@
 1.1.2: Add strip_tags filter
 1.1.3: Add sortbyfield filter to sorting arrays/fields by key.
 1.2.0: Require PHP 7.0 as minimum version.
+1.2.1: Add linter and code sniffer for better automatization.
