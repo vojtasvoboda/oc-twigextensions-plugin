@@ -308,6 +308,9 @@ class Plugin extends PluginBase
             'rtl' => function ($string) {
                 return strrev($string);
             },
+            'str_replace' => function ($string, $search, $replace) {
+                return str_replace($search, $replace, $string);
+            },
             'strip_tags' => function ($string, $allow = '') {
                 return strip_tags($string, $allow);
             },
