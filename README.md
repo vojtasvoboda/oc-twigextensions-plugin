@@ -84,7 +84,7 @@ Function loads a template from a string.
 ## Available filters
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str\_repeat,
-plural, truncate, wordwrap, strpad, strip_tags, leftpad, rightpad, rtl, shuffle, time\_diff,
+plural, truncate, wordwrap, strpad, str_replace, strip_tags, leftpad, rightpad, rtl, shuffle, time\_diff,
 localizeddate, localizednumber, localizedcurrency, mailto, var\_dump, revision
 
 ### strftime
@@ -248,6 +248,20 @@ This would print:
 
 ```
 ooxxxoo
+```
+
+### str_replace
+
+Replace all occurrences of the search string with the replacement string.
+
+```
+{{ 'Alice' | str_replace('Alice', 'Bob') }}
+```
+
+This would return:
+
+```
+Bob
 ```
 
 ### strip_tags
