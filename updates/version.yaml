@@ -20,3 +20,4 @@
 1.2.0: Require PHP 7.0 as minimum version.
 1.2.1: Add linter and code sniffer for better automatization.
 1.2.2: Add str_replace filter (thanks to Szabó Gergő)
+1.2.3: Added an optional css class parameter to mailto function
