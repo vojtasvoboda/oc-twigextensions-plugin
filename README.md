@@ -445,12 +445,13 @@ PHP encrypts your email address and generates the JavaScript that decrypts it. M
 #### Filter parameters
 
 ```
-{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, true, 'Let me know') }}
+{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, true, 'Let me know', 'my-class') }}
 ```
 
 - first boolean parameter = returns email clickable (with link)
 - second boolean parameter = encryption is enabled
 - third string parameter = link text (not encrypted!)
+- fourth (optional) parameter = CSS class name (will render <a mailto:.. class="my-class">..) 
 
 ### var_dump
 
