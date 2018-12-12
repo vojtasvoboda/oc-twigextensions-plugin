@@ -85,7 +85,7 @@ Function loads a template from a string.
 
 strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str\_repeat,
 plural, truncate, wordwrap, strpad, str_replace, strip_tags, leftpad, rightpad, rtl, shuffle, time\_diff,
-localizeddate, localizednumber, localizedcurrency, mailto, var\_dump, revision
+localizeddate, localizednumber, localizedcurrency, mailto, var\_dump, revision, sortbyfield
 
 ### strftime
 
@@ -451,7 +451,7 @@ PHP encrypts your email address and generates the JavaScript that decrypts it. M
 - first boolean parameter = returns email clickable (with link)
 - second boolean parameter = encryption is enabled
 - third string parameter = link text (not encrypted!)
-- fourth (optional) parameter = CSS class name (will render <a mailto:.. class="my-class">..) 
+- fourth (optional) parameter = CSS class name (will render &lt;a mailto:.. class="my-class"&gt;..) 
 
 ### var_dump
 
@@ -481,7 +481,19 @@ See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25
 https://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files  
 
 http://php.net/manual/en/function.date.php  
- 
+
+### sortbyfield
+
+Sort array/collection by given field (key).
+
+```
+{% set data = [{'name': 'David', 'age': 31}, {'name': 'John', 'age': 28}] %}
+{% for item in data | sortbyfield('age') %}
+    {{ item.name }}&nbsp;
+{% endfor %}
+```
+
+Output will be: John David 
 
 ## Contributing
 
