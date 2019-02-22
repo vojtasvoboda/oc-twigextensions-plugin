@@ -21,3 +21,4 @@
 1.2.1: Add linter and code sniffer for better automatization.
 1.2.2: Add str_replace filter (thanks to Szabó Gergő)
 1.2.3: Added an optional css class parameter to mailto function
+1.2.4: Add sk_SK locale, thanks to Marek Závacký
