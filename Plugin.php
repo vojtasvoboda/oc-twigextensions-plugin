@@ -76,6 +76,9 @@ class Plugin extends PluginBase
         // add Config function
         $functions += $this->getConfigFunction();
 
+        // add Env function
+        $functions += $this->getEnvFunction();
+
         // add Session function
         $functions += $this->getSessionFunction();
 
@@ -334,6 +337,20 @@ class Plugin extends PluginBase
         return [
             'config' => function ($key = null, $default = null) {
                 return config($key, $default);
+            },
+        ];
+    }
+
+    /**
+     * Works like the env() helper function.
+     *
+     * @return array
+     */
+    private function getEnvFunction()
+    {
+        return [
+            'env' => function ($key, $default = null) {
+                return env($key, $default);
             },
         ];
     }
