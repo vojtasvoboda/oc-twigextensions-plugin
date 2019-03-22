@@ -31,11 +31,11 @@ Than you can use newly added filters/functions at your templates:
 
 ## Available functions
 
-[config](https://laravel.com/docs/5.0/configuration#accessing-configuration-values), [session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization), [var_dump](http://php.net/manual/en/function.var-dump.php), [template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html)
+[config](https://laravel.com/docs/5.0/configuration#accessing-configuration-values), [env](https://laravel.com/docs/5.8/helpers#method-env), [session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization), [var_dump](http://php.net/manual/en/function.var-dump.php), [template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html)
 
 ### config
 
-Function transports the functionality of the Laravel `config()` helper function to Twig.
+Function move the functionality of the Laravel `config()` helper function to Twig.
 
 ```
 {{ config('app.locale') }}
@@ -43,9 +43,19 @@ Function transports the functionality of the Laravel `config()` helper function 
 The example would output the value currently stored in `app.locale`.
 See [more about the Laravel config helper function here](https://laravel.com/docs/5.0/configuration#accessing-configuration-values).
 
+### env
+
+Function move the functionality of the Laravel `env()` helper function to Twig.
+
+```
+{{ env('APP_ENV', 'production') }}
+```
+
+The example would output the value currently stored in `APP_ENV` environment variable. Second parameter is default value, when ENV key does not exists.
+
 ### session
 
-Function transports the functionality of the Laravel `session()` helper function to Twig.
+Function move the functionality of the Laravel `session()` helper function to Twig.
 
 ```
 {{ session('my.session.key') }}
@@ -55,7 +65,7 @@ See [more about the Laravel session helper function here](https://laravel.com/do
 
 ### trans
 
-Function transports the functionality of the Laravel `trans()` helper function to Twig.
+Function move the functionality of the Laravel `trans()` helper function to Twig.
 
 ```
 {{ trans('acme.blog::lang.app.name') }}
