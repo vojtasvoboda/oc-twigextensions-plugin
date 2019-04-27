@@ -382,6 +382,11 @@ class Plugin extends PluginBase
     {
         return [
             'redirect' => function ($url) {
+
+                if(empty($url)) {
+                    return;
+                }
+
                 return \Redirect::to($url);
             }
         ];
