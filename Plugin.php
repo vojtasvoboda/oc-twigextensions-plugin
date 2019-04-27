@@ -82,6 +82,9 @@ class Plugin extends PluginBase
         // add Session function
         $functions += $this->getSessionFunction();
 
+        // add Redirect function
+        $functions += $this->getRedirectFunction();
+
         // add Trans function
         $functions += $this->getTransFunction();
 
@@ -370,6 +373,21 @@ class Plugin extends PluginBase
     }
 
     /**
+     * Redirect to url.
+     *
+     * added by @lucaszdv
+     * @return array
+     */
+    private function getRedirectFunction()
+    {
+        return [
+            'redirect' => function ($url) {
+                return \Redirect::to($url);
+            }
+        ];
+    }
+
+    /**
      * Works like the trans() helper function.
      *
      * @return array
@@ -400,6 +418,8 @@ class Plugin extends PluginBase
             },
         ];
     }
+
+
 
     /**
      * Create protected link with mailto:
