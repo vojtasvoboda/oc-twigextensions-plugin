@@ -311,6 +311,12 @@ class Plugin extends PluginBase
             'rtl' => function ($string) {
                 return strrev($string);
             },
+            'striptags' => function ($string) {
+                return strip_tags($string);
+            },
+            'nl2br' => function ($string) {
+                return nl2br($string);
+            },
             'str_replace' => function ($string, $search, $replace) {
                 return str_replace($search, $replace, $string);
             },
