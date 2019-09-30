@@ -95,7 +95,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ [1, 2, 3] | shuffle }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->setExpectedException('Twig_Error_Runtime', 'Array to string conversion');
+        $this->expectException('Twig_Error_Runtime', 'Array to string conversion');
         $twigTemplate->render([]);
     }
 
