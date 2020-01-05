@@ -282,7 +282,7 @@ class Plugin extends PluginBase
                 return mb_convert_case($string, MB_CASE_LOWER, "UTF-8");
             },
             'ucfirst' => function ($string) {
-                return mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
+                return ucfirst($string);
             },
             'lcfirst' => function ($string) {
                 return lcfirst($string);
