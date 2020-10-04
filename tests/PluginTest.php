@@ -11,10 +11,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 class PluginTest extends PluginTestCase
 {
-    /**
-     * @return void
-     */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
