@@ -278,6 +278,9 @@ class Plugin extends PluginBase
             'uppercase' => function ($string) {
                 return mb_convert_case($string, MB_CASE_UPPER, "UTF-8");
             },
+            'json_decode' => function ($string) {
+                return json_decode($string);
+            },
             'lowercase' => function ($string) {
                 return mb_convert_case($string, MB_CASE_LOWER, "UTF-8");
             },
