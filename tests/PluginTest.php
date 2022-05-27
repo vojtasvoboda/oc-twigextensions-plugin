@@ -11,7 +11,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 class PluginTest extends PluginTestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -295,33 +295,33 @@ class PluginTest extends PluginTestCase
         // same as mailto(true, true)
         $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto }}";
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertNotContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertContains('mailto:', $twigTemplate->render([]));
+        $this->assertStringNotContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertStringContainsString('mailto:', $twigTemplate->render([]));
 
         // mailto(false, false) eg. without link and unprotected
         $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, false) }}";
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertNotContains('mailto:', $twigTemplate->render([]));
+        $this->assertStringContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertStringNotContainsString('mailto:', $twigTemplate->render([]));
 
         // mailto(true, false) eg. with link but unprotected
         $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, false) }}";
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertContains('mailto', $twigTemplate->render([]));
+        $this->assertStringContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertStringContainsString('mailto', $twigTemplate->render([]));
 
         // mailto(false, true) eg. without link and protected
         $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, true) }}";
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertNotContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertNotContains('mailto', $twigTemplate->render([]));
+        $this->assertStringNotContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertStringNotContainsString('mailto', $twigTemplate->render([]));
 
         // mailto(true, true, 'Let me know') eg. with link, protected and with non-crypted text
         $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, true, 'Let me know') }}";
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertNotContains('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertNotContains('mailto', $twigTemplate->render([]));
-        $this->assertContains('Let me know', $twigTemplate->render([]));
+        $this->assertStringNotContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
+        $this->assertStringNotContainsString('mailto', $twigTemplate->render([]));
+        $this->assertStringContainsString('Let me know', $twigTemplate->render([]));
     }
 
     public function testVardumpFunction()
@@ -331,7 +331,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ var_dump('test') }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertContains('string(4) "test"', $twigTemplate->render([]));
+        $this->assertStringContainsString('string(4) "test"', $twigTemplate->render([]));
     }
 
     public function testVardumpFilter()
@@ -341,7 +341,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ 'test' | var_dump }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertContains('string(4) "test"', $twigTemplate->render([]));
+        $this->assertStringContainsString('string(4) "test"', $twigTemplate->render([]));
     }
 
     public function testConfigFunction()
@@ -401,6 +401,6 @@ class PluginTest extends PluginTestCase
         $template = "{{ trans('backend::lang.access_log.hint', {'days': 60}) }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertContains('60 days', $twigTemplate->render([]));
+        $this->assertStringContainsString('60 days', $twigTemplate->render([]));
     }
 }
