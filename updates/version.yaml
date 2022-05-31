@@ -26,3 +26,4 @@
 1.2.6: Fix ucfirst, thanks to Aurélien Roy
 1.2.7: Add slovenian locale, thanks to Marko Kodrič
 1.3: Fix compatibility with October 2.2.27
+1.3.1: Fix compatibility with October 2.2.27 on PHP 8
