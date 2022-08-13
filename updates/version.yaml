@@ -1,29 +1,30 @@
-1.0.1: First version of TwigExtensions
-1.0.2: Add template_from_string function
-1.0.3: Fix uppercase, lowercase and ucfirst for UTF-8 characters
-1.0.4: Add leftpad, rightpad and strpad filters. Cover by unit tests.
-1.0.5: Add config function (thanks to Sebastian Hilger)
-1.0.6: Fix localizednumber and localizedcurrency filters (thanks to Vita Zoubek)
-1.0.7: Add the session() and trans() helper functions (thanks to Sebastian Hilger)
-1.0.8: Plugin can be installed over Composer.
-1.0.9: Add var_dump filter and function.
-1.0.10: Remove pre tag from var_dump
-1.0.11: Add mailto filter for rendering encrypted email addresses.
-1.0.12: Add mailto text parameter and rtl filter.
-1.0.13: Make time_diff translatable.
-1.0.14: Add pt-br locale for time_diff translation (thanks to Ronaldo Ribeiro de Sousa)
-1.0.15: Add DE and HU locale (thanks to Szabó Gergő and Sebastian Hilger)
-1.1.0: Make changes for Laravel 5.5.
-1.1.1: Add revision filter
-1.1.2: Add strip_tags filter
-1.1.3: Add sortbyfield filter to sorting arrays/fields by key.
-1.2.0: Require PHP 7.0 as minimum version.
-1.2.1: Add linter and code sniffer for better automatization.
-1.2.2: Add str_replace filter (thanks to Szabó Gergő)
-1.2.3: Added an optional css class parameter to mailto function
-1.2.4: Add sk_SK locale, thanks to Marek Závacký
-1.2.5: Add env() helper function, thanks to Marek Závacký
-1.2.6: Fix ucfirst, thanks to Aurélien Roy
-1.2.7: Add slovenian locale, thanks to Marko Kodrič
-1.3: Fix compatibility with October 2.2.27
-1.3.1: Fix compatibility with October 2.2.27 on PHP 8
+"1.0.1": First version of TwigExtensions
+"1.0.2": Add template_from_string function
+"1.0.3": Fix uppercase, lowercase and ucfirst for UTF-8 characters
+"1.0.4": Add leftpad, rightpad and strpad filters. Cover by unit tests.
+"1.0.5": Add config function (thanks to Sebastian Hilger)
+"1.0.6": Fix localizednumber and localizedcurrency filters (thanks to Vita Zoubek)
+"1.0.7": Add the session() and trans() helper functions (thanks to Sebastian Hilger)
+"1.0.8": Plugin can be installed over Composer.
+"1.0.9": Add var_dump filter and function.
+"1.0.10": Remove pre tag from var_dump
+"1.0.11": Add mailto filter for rendering encrypted email addresses.
+"1.0.12": Add mailto text parameter and rtl filter.
+"1.0.13": Make time_diff translatable.
+"1.0.14": Add pt-br locale for time_diff translation (thanks to Ronaldo Ribeiro de Sousa)
+"1.0.15": Add DE and HU locale (thanks to Szabó Gergő and Sebastian Hilger)
+"1.1.0": Make changes for Laravel 5.5.
+"1.1.1": Add revision filter
+"1.1.2": Add strip_tags filter
+"1.1.3": Add sortbyfield filter to sorting arrays/fields by key.
+"1.2.0": Require PHP 7.0 as minimum version.
+"1.2.1": Add linter and code sniffer for better automatization.
+"1.2.2": Add str_replace filter (thanks to Szabó Gergő)
+"1.2.3": Added an optional css class parameter to mailto function
+"1.2.4": Add sk_SK locale, thanks to Marek Závacký
+"1.2.5": Add env() helper function, thanks to Marek Závacký
+"1.2.6": Fix ucfirst, thanks to Aurélien Roy
+"1.2.7": Add slovenian locale, thanks to Marko Kodrič
+"1.3": Fix compatibility with October 2.2.27
+"1.3.1": Fix compatibility with October 2.2.27 on PHP 8
+"1.4": Try to make the plugin work with October 3.x on PHP 8

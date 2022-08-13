@@ -3,13 +3,7 @@
 use App;
 use Backend;
 use Carbon\Carbon;
-use Snilius\Twig\SortByFieldExtension;
 use System\Classes\PluginBase;
-use Twig_Extension_StringLoader;
-use Twig_Extensions_Extension_Array;
-use Twig_Extensions_Extension_Date;
-use Twig_Extensions_Extension_Intl;
-use Twig_Extensions_Extension_Text;
 use VojtaSvoboda\TwigExtensions\Classes\TimeDiffTranslator;
 
 /**
@@ -71,7 +65,13 @@ class Plugin extends PluginBase
         $twig = $this->app->make('twig.environment');
 
         // add String Loader functions
-        $functions += $this->getStringLoaderFunctions($twig);
+        // INFO:
+        /**
+        * things like e.g. wordwrap or truncate can be done in Twig v3.x with
+        * 'Lorem ipsum'|u.wordwrap(5) or
+        * 'Lorem ipsum'|u.truncate(8, '...') repectively.
+        */
+        //$functions += $this->getStringLoaderFunctions($twig);
 
         // add Config function
         $functions += $this->getConfigFunction();
@@ -89,7 +89,13 @@ class Plugin extends PluginBase
         $functions += $this->getVarDumpFunction();
 
         // add Text extensions
-        $filters += $this->getTextFilters($twig);
+        // INFO:
+        /**
+        * things like e.g. wordwrap or truncate can be done in Twig v3.x with
+        * 'Lorem ipsum'|u.wordwrap(5) or
+        * 'Lorem ipsum'|u.truncate(8, '...') repectively.
+        */
+        //$filters += $this->getTextFilters($twig);
 
         // add Intl extensions if php5-intl installed
         if (class_exists('IntlDateFormatter')) {
@@ -97,13 +103,19 @@ class Plugin extends PluginBase
         }
 
         // add Array extensions
-        $filters += $this->getArrayFilters();
+        // INFO:
+        /**
+        * shuffle moved to getPhpFunctions()
+        */
+        //$filters += $this->getArrayFilters();
 
         // add Time extensions
-        $filters += $this->getTimeFilters($twig);
+        // TODO:
+        //$filters += $this->getTimeFilters($twig);
 
         // add Sort by Field extensions
-        $filters += $this->getSortByField();
+        // TODO:
+        //$filters += $this->getSortByField();
 
         // add Mail filters
         $filters += $this->getMailFilters();
@@ -323,6 +335,17 @@ class Plugin extends PluginBase
                 $result = ob_get_clean();
 
                 return $result;
+            },
+            'shuffle' => function ($array) {
+                if (!is_array($array)) return $array;
+
+                $keys = array_keys($array);
+                shuffle($keys);
+                $random = array();
+                foreach ($keys as $key)
+                    $random[$key] = $array[$key];
+
+                return $random;
             },
         ];
     }
