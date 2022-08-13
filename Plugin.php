@@ -337,7 +337,6 @@ class Plugin extends PluginBase
                 return $result;
             },
             'shuffle' => function ($array) {
-                var_dump($array);
                 if (!is_array($array)) return $array;
 
                 $keys = array_keys($array);
