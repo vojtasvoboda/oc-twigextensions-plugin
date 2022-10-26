@@ -5,28 +5,11 @@ use Carbon\Carbon;
 use Config;
 use PluginTestCase;
 use Twig_Environment;
-use VojtaSvoboda\TwigExtensions\Classes\TimeDiffTranslator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 class PluginTest extends PluginTestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->app->setLocale('en');
-
-        $this->app->singleton('time_diff_translator', function ($app) {
-            $loader = $app->make('translation.loader');
-            $locale = $app->config->get('app.locale');
-            $translator = $app->make(TimeDiffTranslator::class, [$loader, $locale]);
-            $translator->setFallback($app->config->get('app.fallback_locale'));
-
-            return $translator;
-        });
-    }
-
     /**
      * Return Twig environment
      *
@@ -48,79 +31,6 @@ class PluginTest extends PluginTestCase
         $this->assertEquals($twigTemplate->render([]), 'Hello John');
     }
 
-    public function testTruncateFilterForFive()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'Gordon Freeman' | truncate(5) }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'Gordo...');
-    }
-
-    public function testTruncateFilterForDefault()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' | truncate }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'Lorem ipsum dolor sit amet, co...');
-    }
-
-    public function testTruncateFilterWithSeparator()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'Gordon Freeman' | truncate(5, false, '-') }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'Gordo-');
-    }
-
-    public function testWordWrapFilter()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' | wordwrap(10) }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), "Lorem ipsu\nm dolor si\nt amet, co\nnsectetur \nadipiscing\n elit");
-    }
-
-    public function testShuffleFilter()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ [1, 2, 3] | shuffle }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->expectException('Twig_Error_Runtime', 'Array to string conversion');
-        $twigTemplate->render([]);
-    }
-
-    public function testShuffleFilterForeach()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{% for i in [1, 2, 3] | shuffle %}{{ i }}{% endfor %}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals(strlen($twigTemplate->render([])), 3);
-    }
-
-    public function testTimeDiffFunction()
-    {
-        $twig = $this->getTwig();
-
-        $now = Carbon::now()->subMinute();
-        $template = "{{ '" . $now->format('Y-m-d H:i:s') . "' | time_diff }}";
-
-        // this test fails at TravisCI and I don't know why
-        $twigTemplate = $twig->createTemplate($template);
-        // $this->assertEquals($twigTemplate->render([]), '1 minute ago');
-    }
-
     public function testStrftimeFunction()
     {
         $twig = $this->getTwig();
@@ -129,46 +39,6 @@ class PluginTest extends PluginTestCase
 
         $twigTemplate = $twig->createTemplate($template);
         $this->assertEquals($twigTemplate->render([]), '24.03.2016 23:05:00');
-    }
-
-    public function testUppercaseFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'Hello Jack' | uppercase }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'HELLO JACK');
-    }
-
-    public function testLowercaseFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'Hello JACK' | lowercase }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'hello jack');
-    }
-
-    public function testUcfirstFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'heLLo jack' | ucfirst }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'HeLLo jack');
-    }
-
-    public function testLcfirstFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'HEllO JACK' | lcfirst }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'hEllO JACK');
     }
 
     public function testLtrimFunction()
@@ -191,36 +61,6 @@ class PluginTest extends PluginTestCase
         $this->assertEquals($twigTemplate->render([]), 'jack');
     }
 
-    public function testStrRepeatFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ ' best' | str_repeat(3) }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), ' best best best');
-    }
-
-    public function testPluralFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'mail' | plural(count) }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'mails');
-    }
-
-    public function testStrpadFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'test' | strpad(10) }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), '   test   ');
-    }
-
     public function testStrReplaceFunction()
     {
         $twig = $this->getTwig();
@@ -239,36 +79,6 @@ class PluginTest extends PluginTestCase
 
         $twigTemplate = $twig->createTemplate($template);
         $this->assertEquals($twigTemplate->render([]), '<p>text</p>');
-    }
-
-    public function testLeftpadFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'test' | leftpad(7) }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), '   test');
-    }
-
-    public function testRightpadFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'test' | rightpad(7, 'o') }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'testooo');
-    }
-
-    public function testRtlFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'Hello world!' | rtl }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), '!dlrow olleH');
     }
 
     public function testSortByFieldFunction()

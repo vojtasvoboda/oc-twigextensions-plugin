@@ -25,7 +25,7 @@ Than you can use newly added filters/functions at your templates:
 	Posted at {{ article.date | strftime('%d.%m.%Y %H:%M:%S') }}
 </p>
 <p class="perex">
-	{{ article.perex | truncate(80) }}
+	{{ article.perex | str_limit(80) }}
 </p>
 ```
 
@@ -73,8 +73,7 @@ Function loads a template from a string.
 
 ## Available filters
 
-strftime, uppercase, lowercase, ucfirst, lcfirst, ltrim, rtrim, str\_repeat,
-plural, truncate, wordwrap, strpad, str_replace, strip_tags, leftpad, rightpad, rtl, shuffle, time\_diff,
+strftime, ltrim, rtrim, str_replace, strip_tags, rtl, time\_diff,
 localizeddate, localizednumber, localizedcurrency, mailto, var\_dump, revision, sortbyfield
 
 ### strftime
@@ -86,46 +85,6 @@ Posted at {{ article.date | strftime('%d.%m.%Y %H:%M:%S') }}
 ```
 
 The example would output *Posted at 04.01.2016 22:57:42*. See [more format parameters](http://php.net/manual/en/function.strftime.php#refsect1-function.strftime-parameters).
-
-### uppercase
-
-Make a string uppercase.
-
-```
-Hello I'm {{ 'Jack' | uppercase }}
-```
-
-The example would output *Hello I'm JACK*.
-
-### lowercase
-
-Make a string lowercase.
-
-```
-Hello I'm {{ 'JACK' | lowercase }}
-```
-
-The example would output *Hello I'm jack*.
-
-### ucfirst
-
-Make a string's first character uppercase.
-
-```
-Hello I'm {{ 'jack' | ucfirst }}
-```
-
-The example would output *Hello I'm Jack*.
-
-### lcfirst
-
-Make a string's first character lowercase.
-
-```
-Hello I'm {{ 'Jack' | lcfirst }}
-```
-
-The example would output *Hello I'm jack*.
 
 ### ltrim
 
@@ -146,99 +105,6 @@ Hello I'm {{ 'jack ' | rtrim }}
 ```
 
 The example would output *Hello I'm jack* without whitespaces from the end.
-
-### str_repeat
-
-Repeat a string.
-
-```
-I'm the {{ 'best' | str_repeat(3) }}!
-```
-
-The example would output *I'm the best best best!*
-
-### plural
-
-Get the plural form of an English word.
-
-```
-You have {{ count }} new {{ 'mail' | plural(count) }}
-```
-
-The example would output *You have 1 new mail* or *You have 3 new mails* - depending on mails count.
-
-### truncate
-
-Use the truncate filter to cut off a string after limit is reached.
-
-```
-{{ "Hello World!" | truncate(5) }}
-```
-
-The example would output *Hello...*, as ... is the default separator.
-
-You can also tell truncate to preserve whole words by setting the second parameter to true. If the last Word is on the the separator, truncate will print out the whole Word.
-
-```
-{{ "Hello World!" | truncate(7, true) }}
-```
-
-Here *Hello World!* would be printed.
-
-If you want to change the separator, just set the third parameter to your desired separator.
-
-```
-{{ "Hello World!" | truncate(7, false, "??") }}
-```
-
-This example would print *Hello W??*.
-
-### wordwrap
-
-Use the wordwrap filter to split your text in lines with equal length.
-
-```
-{{ "Lorem ipsum dolor sit amet, consectetur adipiscing" | wordwrap(10) }}
-```
-This example would print:
-
-```
-Lorem ipsu  
-m dolor si  
-t amet, co  
-nsectetur  
-adipiscing  
-```
-
-The default separator is "\n", but you can easily change that by providing one:
-
-```
-{{ "Lorem ipsum dolor sit amet, consectetur adipiscing" | wordwrap(10, "zz\n") }}
-```
-
-This would result in:
-
-```
-Lorem ipsuzz  
-m dolor sizz  
-t amet, cozz  
-nsectetur zz  
-adipiscing  
-```
-
-### strpad
-
-Pad a string to a certain length with another string from both sides.
-
-```
-{{ 'xxx' | strpad(7, 'o') }}
-```
-
-This would print:
-
-```
-ooxxxoo
-```
 
 ### str_replace
 
@@ -267,85 +133,6 @@ This would return:
 ```
 <p>Text</p>
 ```
-
-### leftpad
-
-Pad a string to a certain length with another string from left side.
-
-```
-{{ 'xxx' | leftpad(5, 'o') }}
-```
-
-This would print:
-
-```
-ooxxx
-```
-
-### rightpad
-
-Pad a string to a certain length with another string from right side.
-
-```
-{{ 'xxx' | rightpad(5, 'o') }}
-```
-
-This would print:
-
-```
-xxxoo
-```
-
-### rtl
-
-Reverse a string.
-
-```
-{{ 'Hello world!' | rtl }}
-```
-
-This would print:
-
-```
-!dlrow olleH
-```
-
-### shuffle
-
-Shuffle an array.
-
-```
-{{ songs | shuffle }}
-```
-
-or in foreach:
-
-```
-{% for fruit in ['apple', 'banana', 'orange'] | shuffle %}
-	{{ fruit }}
-{% endfor %}
-```
-
-### time_diff
-
-Use the time_diff filter to render the difference between a date and now.
-
-```
-{{ post.published_at | time_diff }}
-```
-
-The example above will output a string like 4 seconds ago or in 1 month, depending on the filtered date.
-
-Output is **translatable**. All translations are stored at `/lang` folder in this plugin. If you want more locales, just copy them from [this repository](https://github.com/KnpLabs/KnpTimeBundle/tree/master/Resources/translations), replace `%count%` with `:count` and send it as pull reqest to this repository.
-
-#### Arguments
-
-- date: The date for calculate the difference from now. Can be a string or a DateTime instance.
-- now: The date that should be used as now. Can be a string or a DateTime instance. Do not set this argument to use current date.
-
-#### Translation
-
-To get a translatable output, give a Symfony\Component\Translation\TranslatorInterface as constructor argument. The returned string is formatted as diff.ago.XXX or diff.in.XXX where XXX can be any valid unit: second, minute, hour, day, month, year.
 
 ### localizeddate
 

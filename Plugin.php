@@ -6,11 +6,7 @@ use Carbon\Carbon;
 use Snilius\Twig\SortByFieldExtension;
 use System\Classes\PluginBase;
 use Twig_Extension_StringLoader;
-use Twig_Extensions_Extension_Array;
-use Twig_Extensions_Extension_Date;
 use Twig_Extensions_Extension_Intl;
-use Twig_Extensions_Extension_Text;
-use VojtaSvoboda\TwigExtensions\Classes\TimeDiffTranslator;
 
 /**
  * Twig Extensions Plugin.
@@ -42,14 +38,7 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        $this->app->singleton('time_diff_translator', function ($app) {
-            $loader = $app->make('translation.loader');
-            $locale = $app->config->get('app.locale');
-            $translator = $app->make(TimeDiffTranslator::class, [$loader, $locale]);
-            $translator->setFallback($app->config->get('app.fallback_locale'));
-
-            return $translator;
-        });
+        // ...
     }
 
     /**
@@ -82,19 +71,10 @@ class Plugin extends PluginBase
         // add var_dump function
         $functions += $this->getVarDumpFunction();
 
-        // add Text extensions
-        $filters += $this->getTextFilters($twig);
-
         // add Intl extensions if php5-intl installed
         if (class_exists('IntlDateFormatter')) {
             $filters += $this->getLocalizedFilters($twig);
         }
-
-        // add Array extensions
-        $filters += $this->getArrayFilters();
-
-        // add Time extensions
-        $filters += $this->getTimeFilters($twig);
 
         // add Sort by Field extensions
         $filters += $this->getSortByField();
@@ -109,7 +89,7 @@ class Plugin extends PluginBase
         $filters += $this->getFileRevision();
 
         return [
-            'filters'   => $filters,
+            'filters' => $filters,
             'functions' => $functions,
         ];
     }
@@ -130,30 +110,6 @@ class Plugin extends PluginBase
             'template_from_string' => function ($template) use ($twig, $stringLoaderFunc) {
                 $callable = $stringLoaderFunc[0]->getCallable();
                 return $callable($twig, $template);
-            }
-        ];
-    }
-
-    /**
-     * Returns Text filters.
-     *
-     * @param \Twig_Environment $twig
-     *
-     * @return array
-     */
-    private function getTextFilters($twig)
-    {
-        $textExtension = new Twig_Extensions_Extension_Text();
-        $textFilters = $textExtension->getFilters();
-
-        return [
-            'truncate' => function ($value, $length = 30, $preserve = false, $separator = '...') use ($twig, $textFilters) {
-                $callable = $textFilters[0]->getCallable();
-                return $callable($twig, $value, $length, $preserve, $separator);
-            },
-            'wordwrap' => function ($value, $length = 80, $separator = "\n", $preserve = false) use ($twig, $textFilters) {
-                $callable = $textFilters[1]->getCallable();
-                return $callable($twig, $value, $length, $separator, $preserve);
             }
         ];
     }
@@ -182,45 +138,6 @@ class Plugin extends PluginBase
             'localizedcurrency' => function ($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
                 $callable = $intlFilters[2]->getCallable();
                 return $callable($number, $currency, $locale);
-            }
-        ];
-    }
-
-    /**
-     * Returns Array filters.
-     *
-     * @return array
-     */
-    private function getArrayFilters()
-    {
-        $arrayExtension = new Twig_Extensions_Extension_Array();
-        $arrayFilters = $arrayExtension->getFilters();
-
-        return [
-            'shuffle' => function ($array) use ($arrayFilters) {
-                $callable = $arrayFilters[0]->getCallable();
-                return $callable($array);
-            }
-        ];
-    }
-
-    /**
-     * Returns Date filters.
-     *
-     * @param \Twig_Environment $twig
-     *
-     * @return array
-     */
-    private function getTimeFilters($twig)
-    {
-        $translator = $this->app->make('time_diff_translator');
-        $timeExtension = new Twig_Extensions_Extension_Date($translator);
-        $timeFilters = $timeExtension->getFilters();
-
-        return [
-            'time_diff' => function ($date, $now = null) use ($twig, $timeFilters) {
-                $callable = $timeFilters[0]->getCallable();
-                return $callable($twig, $date, $now);
             }
         ];
     }
@@ -269,41 +186,11 @@ class Plugin extends PluginBase
                 $timeObj = new Carbon($time);
                 return strftime($format, $timeObj->getTimestamp());
             },
-            'uppercase' => function ($string) {
-                return mb_convert_case($string, MB_CASE_UPPER, "UTF-8");
-            },
-            'lowercase' => function ($string) {
-                return mb_convert_case($string, MB_CASE_LOWER, "UTF-8");
-            },
-            'ucfirst' => function ($string) {
-                return ucfirst($string);
-            },
-            'lcfirst' => function ($string) {
-                return lcfirst($string);
-            },
             'ltrim' => function ($string, $charlist = " \t\n\r\0\x0B") {
                 return ltrim($string, $charlist);
             },
             'rtrim' => function ($string, $charlist = " \t\n\r\0\x0B") {
                 return rtrim($string, $charlist);
-            },
-            'str_repeat' => function ($string, $multiplier = 1) {
-                return str_repeat($string, $multiplier);
-            },
-            'plural' => function ($string, $count = 2) {
-                return str_plural($string, $count);
-            },
-            'strpad' => function ($string, $pad_length, $pad_string = ' ') {
-                return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_BOTH);
-            },
-            'leftpad' => function ($string, $pad_length, $pad_string = ' ') {
-                return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_LEFT);
-            },
-            'rightpad' => function ($string, $pad_length, $pad_string = ' ') {
-                return str_pad($string, $pad_length, $pad_string, $pad_type = STR_PAD_RIGHT);
-            },
-            'rtl' => function ($string) {
-                return strrev($string);
             },
             'str_replace' => function ($string, $search, $replace) {
                 return str_replace($search, $replace, $string);
