@@ -344,32 +344,6 @@ class PluginTest extends PluginTestCase
         $this->assertStringContainsString('string(4) "test"', $twigTemplate->render([]));
     }
 
-    public function testConfigFunction()
-    {
-        $twig = $this->getTwig();
-
-        $key = 'app.custom.key';
-        $value = 'test value';
-        Config::set($key, $value);
-        $template = "{{ config('" . $key . "') }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), $value);
-    }
-
-    public function testEnvFunction()
-    {
-        $twig = $this->getTwig();
-
-        $key = 'env.custom.key';
-        $value = 'test value';
-        putenv($key.'='.$value);
-        $template = "{{ env('" . $key . "') }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), $value);
-    }
-
     public function testSessionFunction()
     {
         $twig = $this->getTwig();

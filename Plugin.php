@@ -73,12 +73,6 @@ class Plugin extends PluginBase
         // add String Loader functions
         $functions += $this->getStringLoaderFunctions($twig);
 
-        // add Config function
-        $functions += $this->getConfigFunction();
-
-        // add Env function
-        $functions += $this->getEnvFunction();
-
         // add Session function
         $functions += $this->getSessionFunction();
 
@@ -323,34 +317,6 @@ class Plugin extends PluginBase
                 $result = ob_get_clean();
 
                 return $result;
-            },
-        ];
-    }
-
-    /**
-     * Works like the config() helper function.
-     *
-     * @return array
-     */
-    private function getConfigFunction()
-    {
-        return [
-            'config' => function ($key = null, $default = null) {
-                return config($key, $default);
-            },
-        ];
-    }
-
-    /**
-     * Works like the env() helper function.
-     *
-     * @return array
-     */
-    private function getEnvFunction()
-    {
-        return [
-            'env' => function ($key, $default = null) {
-                return env($key, $default);
             },
         ];
     }
