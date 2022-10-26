@@ -3,7 +3,6 @@
 use App;
 use Backend;
 use Carbon\Carbon;
-use Snilius\Twig\SortByFieldExtension;
 use System\Classes\PluginBase;
 use Twig_Extension_StringLoader;
 use Twig_Extensions_Extension_Intl;
@@ -15,11 +14,6 @@ use Twig_Extensions_Extension_Intl;
  */
 class Plugin extends PluginBase
 {
-    /**
-     * @var boolean Determine if this plugin should have elevated privileges.
-     */
-    public $elevated = true;
-
     /**
      * Returns information about this plugin.
      *
@@ -76,12 +70,6 @@ class Plugin extends PluginBase
             $filters += $this->getLocalizedFilters($twig);
         }
 
-        // add Sort by Field extensions
-        $filters += $this->getSortByField();
-
-        // add Mail filters
-        $filters += $this->getMailFilters();
-
         // add PHP functions
         $filters += $this->getPhpFunctions();
 
@@ -98,7 +86,6 @@ class Plugin extends PluginBase
      * Returns String Loader functions.
      *
      * @param \Twig_Environment $twig
-     *
      * @return array
      */
     private function getStringLoaderFunctions($twig)
@@ -118,7 +105,6 @@ class Plugin extends PluginBase
      * Returns Intl filters.
      *
      * @param \Twig_Environment $twig
-     *
      * @return array
      */
     private function getLocalizedFilters($twig)
@@ -138,38 +124,6 @@ class Plugin extends PluginBase
             'localizedcurrency' => function ($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
                 $callable = $intlFilters[2]->getCallable();
                 return $callable($number, $currency, $locale);
-            }
-        ];
-    }
-
-    /**
-     * Returns Sort by Field filters.
-     *
-     * @return array
-     */
-    private function getSortByField()
-    {
-        $extension = new SortByFieldExtension();
-        $filters = $extension->getFilters();
-
-        return [
-            'sortbyfield' => function ($array, $sort_by = null, $direction = 'asc') use ($filters) {
-                $callable = $filters[0]->getCallable();
-                return $callable($array, $sort_by, $direction);
-            }
-        ];
-    }
-
-    /**
-     * Returns mail filters.
-     *
-     * @return array
-     */
-    private function getMailFilters()
-    {
-        return [
-            'mailto' => function ($string, $link = true, $protected = true, $text = null, $class = "") {
-                return $this->hideEmail($string, $link, $protected, $text, $class);
             }
         ];
     }
@@ -252,56 +206,6 @@ class Plugin extends PluginBase
                 return $result;
             },
         ];
-    }
-
-    /**
-     * Create protected link with mailto:
-     *
-     * @param string $email Email to render.
-     * @param bool $link If email should be rendered as link.
-     * @param bool $protected If email should be protected.
-     * @param string $text Link text. Render email by default.
-     *
-     * @see http://www.maurits.vdschee.nl/php_hide_email/
-     *
-     * @return string
-     */
-    private function hideEmail($email, $link = true, $protected = true, $text = null, $class = "")
-    {
-        // email link text
-        $linkText = $email;
-        if ($text !== null) {
-            $linkText = $text;
-        }
-
-        // if we want just unprotected link
-        if (!$protected) {
-            return $link ? '<a href="mailto:' . $email . '">' . $linkText . '</a>' : $linkText;
-        }
-
-        // turn on protection
-        $character_set = '+-.0123456789@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
-        $key = str_shuffle($character_set);
-        $cipher_text = '';
-        $id = 'e' . rand(1, 999999999);
-        for ($i = 0; $i < strlen($email); $i += 1) {
-            $cipher_text .= $key[strpos($character_set, $email[$i])];
-        }
-        $script = 'var a="' . $key . '";var b=a.split("").sort().join("");var c="' . $cipher_text . '";var d=""; var cl="'.$class.'";';
-        $script .= 'for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));';
-        $script .= 'var y = d;';
-        if ($text !== null) {
-            $script .= 'var y = "'.$text.'";';
-        }
-        if ($link) {
-            $script .= 'document.getElementById("' . $id . '").innerHTML="<a class=\""+cl+"\" href=\\"mailto:"+d+"\\">"+y+"</a>"';
-        } else {
-            $script .= 'document.getElementById("' . $id . '").innerHTML=y';
-        }
-        $script = "eval(\"" . str_replace(array("\\", '"'), array("\\\\", '\"'), $script) . "\")";
-        $script = '<script type="text/javascript">/*<![CDATA[*/' . $script . '/*]]>*/</script>';
-
-        return '<span id="' . $id . '">[javascript protected email address]</span>' . $script;
     }
 
     /**

@@ -74,7 +74,7 @@ Function loads a template from a string.
 ## Available filters
 
 strftime, ltrim, rtrim, str_replace, strip_tags, rtl, time\_diff,
-localizeddate, localizednumber, localizedcurrency, mailto, var\_dump, revision, sortbyfield
+localizeddate, localizednumber, localizedcurrency, var\_dump, revision, sortbyfield
 
 ### strftime
 
@@ -197,39 +197,6 @@ Use the localizedcurrency filter to format a currency value into a localized str
 - currency: The 3-letter ISO 4217 currency code indicating the currency to use.
 - locale: The locale used for the format. If NULL is given, Twig will use Locale::getDefault()
 
-### mailto
-
-Filter for rendering email as normal mailto link, but with encryption against bots!
-
-```
-{{ 'vojtasvoboda.cz@gmail.com' | mailto }}
-```
-
-returns
-
-```
-<span id="e846043876">[javascript protected email address]</span><script type="text/javascript">/*<![CDATA[*/eval("var a=\"9IV1G0on6.ryWZYS28iPcNBwq4aeUJF5CskjuLQAh3XdlEz@7KtmpHbTxM-ODg_+Rvf\";var b=a.split(\"\").sort().join(\"\");var c=\"_TtD3O_TXTl3VdfZ@H3KpVdTH\";var d=\"\";for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));document.getElementById(\"e846043876\").innerHTML=\"<a href=\\\"mailto:\"+d+\"\\\">\"+d+\"</a>\"")/*]]>*/</script>
-```
-
-which will be rendered to page as normal
-
-```
-<a href="mailto:vojtasvoboda.cz@gmail.com">vojtasvoboda.cz@gmail.com</a>
-```
-
-PHP encrypts your email address and generates the JavaScript that decrypts it. Most bots can't execute JavaScript and that is what makes this work. A visitors of your web page will not notice that you used this script as long as they has JavaScript enabled. The visitors will see "[javascript protected email address]" instead of the email address if they has JavaScript disabled.
-
-#### Filter parameters
-
-```
-{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, true, 'Let me know', 'my-class') }}
-```
-
-- first boolean parameter = returns email clickable (with link)
-- second boolean parameter = encryption is enabled
-- third string parameter = link text (not encrypted!)
-- fourth (optional) parameter = CSS class name (will render &lt;a mailto:.. class="my-class"&gt;..) 
-
 ### var_dump
 
 Dumps information about a variable.
@@ -258,19 +225,6 @@ See: https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/25
 https://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files  
 
 http://php.net/manual/en/function.date.php  
-
-### sortbyfield
-
-Sort array/collection by given field (key).
-
-```
-{% set data = [{'name': 'David', 'age': 31}, {'name': 'John', 'age': 28}] %}
-{% for item in data | sortbyfield('age') %}
-    {{ item.name }}&nbsp;
-{% endfor %}
-```
-
-Output will be: John David 
 
 ## Contributing
 

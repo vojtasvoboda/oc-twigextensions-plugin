@@ -81,59 +81,6 @@ class PluginTest extends PluginTestCase
         $this->assertEquals($twigTemplate->render([]), '<p>text</p>');
     }
 
-    public function testSortByFieldFunction()
-    {
-        $twig = $this->getTwig();
-
-        // sort by name
-        $template = "{% set data = [{'name': 'David', 'age': 31}, {'name': 'John', 'age': 28}] %}";
-        $template .= "{% for item in data | sortbyfield('name') %}{{ item.name }}{% endfor %}";
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'DavidJohn');
-
-        // sort by age
-        $template = "{% set data = [{'name': 'David', 'age': 31}, {'name': 'John', 'age': 28}] %}";
-        $template .= "{% for item in data | sortbyfield('age') %}{{ item.name }}{% endfor %}";
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'JohnDavid');
-    }
-
-    public function testMailtoFilter()
-    {
-        $twig = $this->getTwig();
-
-        // same as mailto(true, true)
-        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto }}";
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringNotContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertStringContainsString('mailto:', $twigTemplate->render([]));
-
-        // mailto(false, false) eg. without link and unprotected
-        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, false) }}";
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertStringNotContainsString('mailto:', $twigTemplate->render([]));
-
-        // mailto(true, false) eg. with link but unprotected
-        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(true, false) }}";
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertStringContainsString('mailto', $twigTemplate->render([]));
-
-        // mailto(false, true) eg. without link and protected
-        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, true) }}";
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringNotContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertStringNotContainsString('mailto', $twigTemplate->render([]));
-
-        // mailto(true, true, 'Let me know') eg. with link, protected and with non-crypted text
-        $template = "{{ 'vojtasvoboda.cz@gmail.com' | mailto(false, true, 'Let me know') }}";
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringNotContainsString('vojtasvoboda.cz@gmail.com', $twigTemplate->render([]));
-        $this->assertStringNotContainsString('mailto', $twigTemplate->render([]));
-        $this->assertStringContainsString('Let me know', $twigTemplate->render([]));
-    }
-
     public function testVardumpFunction()
     {
         $twig = $this->getTwig();
