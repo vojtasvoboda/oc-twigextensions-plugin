@@ -1,7 +1,7 @@
 {
   "name": "vojtasvoboda/twigextensions-plugin",
   "type": "october-plugin",
-  "keywords": ["twig", "extensions", "truncate", "wordwrap", "uppercase", "lowercase", "time_diff", "leftpad", "strftime"],
+  "keywords": ["twig", "extensions"],
   "description": "Register more Twig filters for your OctoberCMS templates",
   "license": "MIT",
   "authors": [
@@ -11,10 +11,10 @@
     }
   ],
   "require": {
-    "php": ">=7.0.8",
-    "twig/extensions": "~1.5.1",
-    "symfony/translation": "^3.4 || ^4.0",
-    "composer/installers": "^1.10"
+    "php": ">=8.0.2",
+    "october/rain": "^3.1",
+    "composer/installers": "~1.0",
+    "twig/intl-extra": "^3.4"
   },
   "minimum-stability": "stable",
   "scripts": {

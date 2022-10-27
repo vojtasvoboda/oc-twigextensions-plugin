@@ -1,12 +1,9 @@
 <?php namespace VojtaSvoboda\TwigExtensions;
 
-use App;
-use Backend;
 use Carbon\Carbon;
 use System\Classes\PluginBase;
-use Twig\Environment;
 use Twig\Extension\StringLoaderExtension;
-use Twig_Extensions_Extension_Intl;
+use Twig\Extra\Intl\IntlExtension;
 
 /**
  * Twig Extensions Plugin.
@@ -29,27 +26,20 @@ class Plugin extends PluginBase
         ];
     }
 
-    public function boot()
-    {
-        // ...
-    }
-
     /**
      * Add Twig extensions.
-     *
-     * @see Intl extensions http://twig.sensiolabs.org/doc/extensions/intl.html
-     * @return array
      */
-    public function registerMarkupTags()
+    public function registerMarkupTags(): array
     {
         $filters = [];
         $functions = [];
 
-        // init Twig
-        $twig = $this->app->make('twig.environment');
-
         // add String Loader functions
-        $functions += $this->getStringLoaderFunctions($twig);
+        $functions += $this->getStringLoaderFunctions();
+
+        // register Intl functions and filters
+        $functions += $this->getIntlFunctions();
+        $filters += $this->getIntlFilters();
 
         // add Session function
         $functions += $this->getSessionFunction();
@@ -59,11 +49,6 @@ class Plugin extends PluginBase
 
         // add var_dump function
         $functions += $this->getVarDumpFunction();
-
-        // add Intl extensions if php5-intl installed
-        if (class_exists('IntlDateFormatter')) {
-            $filters += $this->getLocalizedFilters($twig);
-        }
 
         // add PHP functions
         $filters += $this->getPhpFunctions();
@@ -80,52 +65,52 @@ class Plugin extends PluginBase
     /**
      * Returns String Loader functions.
      */
-    private function getStringLoaderFunctions(Environment $twig): array
+    private function getStringLoaderFunctions(): array
     {
         $stringLoader = new StringLoaderExtension();
-        $stringLoaderFunc = $stringLoader->getFunctions();
 
-        return [
-            'template_from_string' => function ($template, $name = null) use ($twig, $stringLoaderFunc) {
-                $callable = $stringLoaderFunc[0]->getCallable();
-                return $callable($twig, $template, $name);
-            }
-        ];
+        $functions = [];
+        foreach ($stringLoader->getFunctions() as $function) {
+            $functions[$function->getName()] = $function->getCallable();
+        }
+
+        return $functions;
     }
 
     /**
-     * Returns Intl filters.
-     *
-     * @param \Twig_Environment $twig
-     * @return array
+     * Returns Localized functions.
      */
-    private function getLocalizedFilters($twig)
+    private function getIntlFunctions(): array
     {
-        $intlExtension = new Twig_Extensions_Extension_Intl();
-        $intlFilters = $intlExtension->getFilters();
+        $intlExtension = new IntlExtension();
 
-        return [
-            'localizeddate' => function ($date, $dateFormat = 'medium', $timeFormat = 'medium', $locale = null, $timezone = null, $format = null) use ($twig, $intlFilters) {
-                $callable = $intlFilters[0]->getCallable();
-                return $callable($twig, $date, $dateFormat, $timeFormat, $locale, $timezone, $format);
-            },
-            'localizednumber' => function ($number, $style = 'decimal', $type = 'default', $locale = null) use ($twig, $intlFilters) {
-                $callable = $intlFilters[1]->getCallable();
-                return $callable($number, $style, $type, $locale);
-            },
-            'localizedcurrency' => function ($number, $currency = null, $locale = null) use ($twig, $intlFilters) {
-                $callable = $intlFilters[2]->getCallable();
-                return $callable($number, $currency, $locale);
-            }
-        ];
+        $functions = [];
+        foreach ($intlExtension->getFunctions() as $function) {
+            $functions[$function->getName()] = $function->getCallable();
+        }
+
+        return $functions;
+    }
+
+    /**
+     * Returns Localized filters.
+     */
+    private function getIntlFilters(): array
+    {
+        $intlExtension = new IntlExtension();
+
+        $filters = [];
+        foreach ($intlExtension->getFilters() as $filter) {
+            $filters[$filter->getName()] = $filter->getCallable();
+        }
+
+        return $filters;
     }
 
     /**
      * Returns plain PHP functions.
-     *
-     * @return array
      */
-    private function getPhpFunctions()
+    private function getPhpFunctions(): array
     {
         return [
             'strftime' => function ($time, $format = '%d.%m.%Y %H:%M:%S') {
@@ -153,10 +138,8 @@ class Plugin extends PluginBase
 
     /**
      * Works like the session() helper function.
-     *
-     * @return array
      */
-    private function getSessionFunction()
+    private function getSessionFunction(): array
     {
         return [
             'session' => function ($key = null) {
@@ -167,10 +150,8 @@ class Plugin extends PluginBase
 
     /**
      * Works like the trans() helper function.
-     *
-     * @return array
      */
-    private function getTransFunction()
+    private function getTransFunction(): array
     {
         return [
             'trans' => function ($key = null, $parameters = []) {
@@ -181,10 +162,8 @@ class Plugin extends PluginBase
 
     /**
      * Dumps information about a variable.
-     *
-     * @return array
      */
-    private function getVarDumpFunction()
+    private function getVarDumpFunction(): array
     {
         return [
             'var_dump' => function ($expression) {

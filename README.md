@@ -7,14 +7,14 @@
 
 Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies.
 
-Tested with the latest stable OctoberCMS build 420 (with Laravel 5.5). For Laravel 5.4 use special branch `laravel54`.
+Tested with the latest stable OctoberCMS. For Laravel 5.4 use special branch `laravel54`.
 
 ## Installation
 
 Install plugin from CMS backend or by Composer:
 
 ```
-composer require vojtasvoboda/oc-twigextensions-plugin:dev-master
+composer require vojtasvoboda/oc-twigextensions-plugin
 ```
 
 Than you can use newly added filters/functions at your templates:
@@ -31,7 +31,7 @@ Than you can use newly added filters/functions at your templates:
 
 ## Available functions
 
-[session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization), [var_dump](http://php.net/manual/en/function.var-dump.php), [template\_from\_string](http://twig.sensiolabs.org/doc/functions/template_from_string.html)
+[session](https://laravel.com/docs/5.0/session#session-usage), [trans](https://octobercms.com/docs/plugin/localization), [var_dump](http://php.net/manual/en/function.var-dump.php), [template\_from\_string](https://twig.symfony.com/doc/3.x/functions/template_from_string.html)
 
 ### session
 
@@ -73,8 +73,7 @@ Function loads a template from a string.
 
 ## Available filters
 
-strftime, ltrim, rtrim, strip_tags, rtl, time\_diff,
-localizeddate, localizednumber, localizedcurrency, var\_dump, revision, sortbyfield
+strftime, ltrim, rtrim, strip_tags, rtl, time\_diff, var\_dump, revision
 
 ### strftime
 
@@ -119,69 +118,6 @@ This would return:
 ```
 <p>Text</p>
 ```
-
-### localizeddate
-
-Use the localizeddate filter to format dates into a localized string representating the date. Note that **php5-intl extension**/**php7-intl extension** has to be installed!
-
-```
-{{ post.published_at | localizeddate('medium', 'none', locale) }}
-```
-
-The localizeddate filter accepts strings (it must be in a format supported by the strtotime function), DateTime instances, or Unix timestamps.
-
-#### Arguments
-- date_format: The date format. Choose one of these formats:
-    - 'none': IntlDateFormatter::NONE
-    - 'short': IntlDateFormatter::SHORT
-    - 'medium': IntlDateFormatter::MEDIUM
-    - 'long': IntlDateFormatter::LONG
-    - 'full': IntlDateFormatter::FULL
-- time_format: The time format. Same formats possible as above.
-- locale: The locale used for the format. If NULL is given, Twig will use Locale::getDefault()
-- timezone: The date timezone
-- format: Optional pattern to use when formatting or parsing. Possible patterns are documented in the ICU user guide.
-
-### localizednumber
-
-Use the localizednumber filter to format numbers into a localized string representating the number. Note that **php5-intl extension** has to be installed!
-
-```
-{{ product.quantity | localizednumber }}
-```
-
-Internally, Twig uses the PHP NumberFormatter::create() function for the number.
-
-#### Arguments
-
-- style: Optional date format (default: 'decimal'). Choose one of these formats:
-    - 'decimal': NumberFormatter::DECIMAL
-    - 'currency': NumberFormatter::CURRENCY
-    - 'percent': NumberFormatter::PERCENT
-    - 'scientific': NumberFormatter::SCIENTIFIC
-    - 'spellout': NumberFormatter::SPELLOUT
-    - 'ordinal': NumberFormatter::ORDINAL
-    - 'duration': NumberFormatter::DURATION
-- type: Optional formatting type to use (default: 'default'). Choose one of these types:
-    - 'default': NumberFormatter::TYPE_DEFAULT
-    - 'int32': NumberFormatter::TYPE_INT32
-    - 'int64': NumberFormatter::TYPE_INT64
-    - 'double': NumberFormatter::TYPE_DOUBLE
-    - 'currency': NumberFormatter::TYPE_CURRENCY
-- locale: The locale used for the format. If NULL is given, Twig will use Locale::getDefault()
-
-### localizedcurrency
-
-Use the localizedcurrency filter to format a currency value into a localized string. Note that **php5-intl extension** has to be installed!
-
-```
-{{ product.price | localizedcurrency('EUR') }}
-```
-
-#### Arguments
-
-- currency: The 3-letter ISO 4217 currency code indicating the currency to use.
-- locale: The locale used for the format. If NULL is given, Twig will use Locale::getDefault()
 
 ### var_dump
 
