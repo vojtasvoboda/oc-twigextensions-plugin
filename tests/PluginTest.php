@@ -61,16 +61,6 @@ class PluginTest extends PluginTestCase
         $this->assertEquals($twigTemplate->render([]), 'jack');
     }
 
-    public function testStrReplaceFunction()
-    {
-        $twig = $this->getTwig();
-
-        $template = "{{ 'test' | str_replace('test', 'tset') }}";
-
-        $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'tset');
-    }
-
     public function testStripTagsFunction()
     {
         $twig = $this->getTwig();

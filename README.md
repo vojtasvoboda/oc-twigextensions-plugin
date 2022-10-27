@@ -73,7 +73,7 @@ Function loads a template from a string.
 
 ## Available filters
 
-strftime, ltrim, rtrim, str_replace, strip_tags, rtl, time\_diff,
+strftime, ltrim, rtrim, strip_tags, rtl, time\_diff,
 localizeddate, localizednumber, localizedcurrency, var\_dump, revision, sortbyfield
 
 ### strftime
@@ -105,20 +105,6 @@ Hello I'm {{ 'jack ' | rtrim }}
 ```
 
 The example would output *Hello I'm jack* without whitespaces from the end.
-
-### str_replace
-
-Replace all occurrences of the search string with the replacement string.
-
-```
-{{ 'Alice' | str_replace('Alice', 'Bob') }}
-```
-
-This would return:
-
-```
-Bob
-```
 
 ### strip_tags
 

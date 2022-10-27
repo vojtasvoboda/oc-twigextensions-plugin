@@ -9,8 +9,6 @@ use Twig_Extensions_Extension_Intl;
 
 /**
  * Twig Extensions Plugin.
- *
- * @see http://twig.sensiolabs.org/doc/extensions/index.html#extensions-install
  */
 class Plugin extends PluginBase
 {
@@ -38,11 +36,7 @@ class Plugin extends PluginBase
     /**
      * Add Twig extensions.
      *
-     * @see Text extensions http://twig.sensiolabs.org/doc/extensions/text.html
      * @see Intl extensions http://twig.sensiolabs.org/doc/extensions/intl.html
-     * @see Array extension http://twig.sensiolabs.org/doc/extensions/array.html
-     * @see Time extension http://twig.sensiolabs.org/doc/extensions/date.html
-     *
      * @return array
      */
     public function registerMarkupTags()
@@ -145,9 +139,6 @@ class Plugin extends PluginBase
             },
             'rtrim' => function ($string, $charlist = " \t\n\r\0\x0B") {
                 return rtrim($string, $charlist);
-            },
-            'str_replace' => function ($string, $search, $replace) {
-                return str_replace($search, $replace, $string);
             },
             'strip_tags' => function ($string, $allow = '') {
                 return strip_tags($string, $allow);
