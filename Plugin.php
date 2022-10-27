@@ -18,11 +18,11 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Twig Extensions',
+            'name' => 'Twig Extensions',
             'description' => 'Add more Twig filters to your templates.',
-            'author'      => 'Vojta Svoboda',
-            'icon'        => 'icon-plus',
-            'homepage'    => 'https://github.com/vojtasvoboda/oc-twigextensions-plugin',
+            'author' => 'Vojta Svoboda',
+            'icon' => 'icon-plus',
+            'homepage' => 'https://github.com/vojtasvoboda/oc-twigextensions-plugin',
         ];
     }
 
@@ -133,6 +133,9 @@ class Plugin extends PluginBase
 
                 return $result;
             },
+            'wordwrap' => function (string $string, int $width = 75, string $break = "\n", bool $cut_long_words = false) {
+                return wordwrap($string, $width, $break, $cut_long_words);
+            }
         ];
     }
 

@@ -71,6 +71,16 @@ class PluginTest extends PluginTestCase
         $this->assertEquals($twigTemplate->render([]), '<p>text</p>');
     }
 
+    public function testWordWrapFilter()
+    {
+        $twig = $this->getTwig();
+
+        $template = "{{ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' | wordwrap(10) }}";
+
+        $twigTemplate = $twig->createTemplate($template);
+        $this->assertEquals($twigTemplate->render([]), "Lorem ipsu\nm dolor si\nt amet, co\nnsectetur \nadipiscing\n elit");
+    }
+
     public function testVardumpFunction()
     {
         $twig = $this->getTwig();

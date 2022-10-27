@@ -73,7 +73,7 @@ Function loads a template from a string.
 
 ## Available filters
 
-strftime, ltrim, rtrim, strip_tags, rtl, time\_diff, var\_dump, revision
+strftime, ltrim, rtrim, strip_tags, var\_dump, wordwrap, revision
 
 ### strftime
 
@@ -117,6 +117,39 @@ This would return:
 
 ```
 <p>Text</p>
+```
+
+### wordwrap
+
+Use the wordwrap filter to split your text in lines with equal length.
+
+```
+{{ "Lorem ipsum dolor sit amet, consectetur adipiscing" | wordwrap(10) }}
+```
+This example would print:
+
+```
+Lorem ipsu  
+m dolor si  
+t amet, co  
+nsectetur  
+adipiscing  
+```
+
+The default separator is "\n", but you can easily change that by providing one:
+
+```
+{{ "Lorem ipsum dolor sit amet, consectetur adipiscing" | wordwrap(10, "zz\n") }}
+```
+
+This would result in:
+
+```
+Lorem ipsuzz  
+m dolor sizz  
+t amet, cozz  
+nsectetur zz  
+adipiscing  
 ```
 
 ### var_dump
