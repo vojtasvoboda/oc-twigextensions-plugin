@@ -201,8 +201,8 @@ Functions used in version 1.x for October v1/v2 and removed from this version:
 
 Filters used in version 1.x for October v1/v2 and removed from this version:
 
-- uppercase - use str_upper
-- lowercase - use str_lower
+- uppercase - use str_upper or just upper
+- lowercase - use str_lower or just lower
 - ucfirst - use str_ucfirst
 - lcfirst - use str_lcfirst
 - str_repeat - it's native filter now
@@ -221,7 +221,7 @@ Filters used in version 1.x for October v1/v2 and removed from this version:
 - localizedcurrency - use format_currency
 - mailto - use html_mailto
 - var_dump - use dump function
-- sortbyfield - use `collect(data).sortBy('age')`
+- sortbyfield - use `collect(data).sortBy('age')` or `collect(data).sortByDesc('age')`
 
 For more info see [UPGRADING.md](UPGRADING.md) guide.
 

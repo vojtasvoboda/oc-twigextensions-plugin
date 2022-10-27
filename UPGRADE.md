@@ -51,7 +51,7 @@ You can still use filter `{{ article.date | strftime('%d.%m.%Y %H:%M:%S') }}` or
 
 ### uppercase
 
-Use the `str_upper` filter
+Use the `str_upper` filter or just `upper`:
 
 ```twig
 {{ 'Jack'|str_upper }}
@@ -59,7 +59,7 @@ Use the `str_upper` filter
 
 ### lowercase
 
-Use the `str_lower` filter
+Use the `str_lower` filter or just `lower`:
 
 ```twig
 {{ 'JACK'|str_lower }}
@@ -218,6 +218,7 @@ Use `collect()` with `sort`
 
 ```twig
 collect(data).sortBy('age')
+collect(data).sortByDesc('age')
 ```
 
 For example:
