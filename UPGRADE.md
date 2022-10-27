@@ -135,7 +135,7 @@ Use the `str_replace` filter
 You can still use function `{{ '<p><b>Text</b></p>' | strip_tags('<p>') }}` or use the `html_strip` October filter
 
 ```
-{{ '<p><b>Text</b></p>'|html_strip(') }}
+{{ '<p><b>Text</b></p>'|html_strip }}
 ```
 
 ### leftpad

@@ -5,9 +5,13 @@
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/g/vojtasvoboda/oc-twigextensions-plugin.svg)](https://scrutinizer-ci.com/g/vojtasvoboda/oc-twigextensions-plugin/?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vojtasvoboda/oc-twigextensions-plugin/blob/master/LICENSE)
 
-Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies.
+Twig extensions plugin for OctoberCMS adds new filter and functions to your templates. No other plugin dependencies. Tested with the latest stable OctoberCMS 3.1.18 on PHP 8.0.
 
-Tested with the latest stable OctoberCMS. For Laravel 5.4 use special branch `laravel54`.
+## Versions
+
+There are two versions of this plugin. For October v1/v2 use special branch 1.x. For October 3.1+ use master branch. For old Laravel 5.4 October versions use special branch `laravel54`.
+
+For migrating to October 3.1 you can use special [UPGRADING.md](UPGRADING.md) guide.
 
 ## Installation
 
@@ -20,12 +24,12 @@ composer require vojtasvoboda/oc-twigextensions-plugin
 Than you can use newly added filters/functions at your templates:
 
 ```
-<h1 class="heading">{{ article.heading | uppercase }}</h1>
+<h1 class="heading">{{ article.heading | ltrim }}</h1>
 <p class="created">
 	Posted at {{ article.date | strftime('%d.%m.%Y %H:%M:%S') }}
 </p>
 <p class="perex">
-	{{ article.perex | str_limit(80) }}
+	{{ article.perex | wordwrap(80) }}
 </p>
 ```
 
@@ -75,6 +79,11 @@ Function loads a template from a string.
 
 strftime, ltrim, rtrim, strip_tags, var\_dump, wordwrap, revision
 
+Filters and function from twig/intl-extra package (see https://github.com/twigphp/intl-extra):
+- internationalized names filters: country_name, currency_name, currency_symbol, language_name, locale_name, timezone_name
+- localized formatters filters: format_currency, format_number, format_*_number, format_datetime, format_date, format_time
+- function: country_timezones
+
 ### strftime
 
 Format a local time/date according to locale settings.
@@ -119,6 +128,14 @@ This would return:
 <p>Text</p>
 ```
 
+### var_dump
+
+Dumps information about a variable.
+
+```
+<pre>{{ users | var_dump }}</pre>
+```
+
 ### wordwrap
 
 Use the wordwrap filter to split your text in lines with equal length.
@@ -152,14 +169,6 @@ nsectetur zz
 adipiscing  
 ```
 
-### var_dump
-
-Dumps information about a variable.
-
-```
-<pre>{{ users | var_dump }}</pre>
-```
-
 ### revision
  
 Force the browser to reload cached modified/updated asset files.
@@ -181,11 +190,43 @@ https://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-jav
 
 http://php.net/manual/en/function.date.php  
 
+## Removed functions
+
+Functions used in version 1.x for October v1/v2 and removed from this version:
+
+- config() - it's native function now
+- env() - it's native function now
+
+## Removed filters
+
+Filters used in version 1.x for October v1/v2 and removed from this version:
+
+- uppercase - use str_upper
+- lowercase - use str_lower
+- ucfirst - use str_ucfirst
+- lcfirst - use str_lcfirst
+- str_repeat - it's native filter now
+- plural - use str_plural
+- truncate - use str_limit
+- strpad - use str_pad_both
+- str_replace - it's native filter now
+- strip_tags - use html_strip
+- leftpad - use str_pad_left
+- rightpad - use str_pad_right
+- rtl - use str_reverse
+- shuffle - use `collect(songs).shuffle()`
+- time_diff - use `carbon(post.published_at).diffForHumans()`
+- localizeddate - use format_date
+- localizednumber - use format_number
+- localizedcurrency - use format_currency
+- mailto - use html_mailto
+- var_dump - use dump function
+- sortbyfield - use `collect(data).sortBy('age')`
+
+For more info see [UPGRADING.md](UPGRADING.md) guide.
+
 ## Contributing
 
-- [ ] Fix time_diff unit test, which pass at local machine, but fails at TravisCI.
-- [ ] Convert PHP functions and custom code to the Twig_Extension classes.
-- [ ] Create Twig_Extension loader and load all extensions and filters as Twig_Extension automatically from config.
 - [ ] New filters *ga* and *gtm* for adding GA or GTM code (Heap Analytics) - {{ 'UA-1234567' | ga }}.
 - [ ] Add [cache extension](https://github.com/vojtasvoboda/oc-twigextensions-plugin/issues/11).
 
