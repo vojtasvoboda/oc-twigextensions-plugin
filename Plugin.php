@@ -4,7 +4,8 @@ use App;
 use Backend;
 use Carbon\Carbon;
 use System\Classes\PluginBase;
-use Twig_Extension_StringLoader;
+use Twig\Environment;
+use Twig\Extension\StringLoaderExtension;
 use Twig_Extensions_Extension_Intl;
 
 /**
@@ -78,19 +79,16 @@ class Plugin extends PluginBase
 
     /**
      * Returns String Loader functions.
-     *
-     * @param \Twig_Environment $twig
-     * @return array
      */
-    private function getStringLoaderFunctions($twig)
+    private function getStringLoaderFunctions(Environment $twig): array
     {
-        $stringLoader = new Twig_Extension_StringLoader();
+        $stringLoader = new StringLoaderExtension();
         $stringLoaderFunc = $stringLoader->getFunctions();
 
         return [
-            'template_from_string' => function ($template) use ($twig, $stringLoaderFunc) {
+            'template_from_string' => function ($template, $name = null) use ($twig, $stringLoaderFunc) {
                 $callable = $stringLoaderFunc[0]->getCallable();
-                return $callable($twig, $template);
+                return $callable($twig, $template, $name);
             }
         ];
     }
