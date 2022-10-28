@@ -12,7 +12,7 @@ Twig extensions plugin for OctoberCMS adds new filter and functions to your temp
 There are two versions of this plugin - 1.x and 2.x. For older October 1.0.x, 1.1.x or 2.x.x use special [branch 1.x](https://github.com/vojtasvoboda/oc-twigextensions-plugin/tree/1.x). For October 3.1+ use master branch. 
 For old Laravel 5.4 October's versions use special branch `laravel54`.
 
-For migrating between plugin's version 1 and version 2 you can use special [UPGRADING.md](UPGRADING.md) guide.
+For migrating between plugin's version 1 and version 2 you can use special [UPGRADE.md](UPGRADE.md) guide.
 
 ## Installation
 
@@ -548,7 +548,7 @@ Filters used in plugin's version 1.x for October 1.0.x, 1.1.x, 2.0.x and removed
 - var_dump - use dump function
 - sortbyfield - use `collect(data).sortBy('age')` or `collect(data).sortByDesc('age')`
 
-For more info see [UPGRADING.md](UPGRADING.md) guide.
+For more info see [UPGRADE.md](UPGRADE.md) guide.
 
 ## Contributing
 
