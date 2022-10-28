@@ -40,7 +40,7 @@ Than you can use newly added filters/functions at your templates:
 
 ### session
 
-Function move the functionality of the Laravel `session()` helper function to Twig.
+Function moves the functionality of the Laravel `session()` helper function to Twig.
 
 ```
 {{ session('my.session.key') }}
@@ -52,7 +52,7 @@ You can also use OctoberCMS function: `{{ this.session.get('my.session.key') }}`
 
 ### trans
 
-Function move the functionality of the Laravel `trans()` helper function to Twig.
+Function moves the functionality of the Laravel `trans()` helper function to Twig.
 
 ```
 {{ trans('acme.blog::lang.app.name') }}
@@ -64,7 +64,7 @@ You can also use trans filter: `{{ 'acme.blog::lang.app.name'|trans }}`.
 
 ### var_dump
 
-Dumps information about a variable. Can be also used as filter.
+Dumps information about a variable. Can be also used as a filter.
 
 ```
 <pre>{{ var_dump(users) }}</pre>
@@ -146,7 +146,7 @@ You can also use `<pre>{{ var_dump(users) }}</pre>` or `{{ dump(users) }}` funct
 
 ### wordwrap
 
-Use the wordwrap filter to split your text in lines with equal length.
+Use the wordwrap filter to split your text into lines with equal length.
 
 ```
 {{ "Lorem ipsum dolor sit amet, consectetur adipiscing" | wordwrap(10) }}
@@ -180,7 +180,7 @@ adipiscing
 ### revision
  
 Force the browser to reload cached modified/updated asset files.
-You can provide a format parameter so that the prepended timestamp get converted accordingly to the PHP date() function.
+You can provide a format parameter so that the prepended timestamp gets converted accordingly to the PHP date() function.
 
 #### usage
 ```
