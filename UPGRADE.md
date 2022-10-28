@@ -4,13 +4,6 @@ This guide can be used to help migrate from `VojtaSvoboda.TwigExtensions`. It in
 
 Beginning from October CMS v3.1.17, some new functions were added to the core that replaced some functions provided by this plugin, and many of the functions were already available in the core. Use the following document to find the latest syntax for each extension function.
 
-## New filters
-
-Filters and function from twig/intl-extra package (see https://github.com/twigphp/intl-extra):
-- internationalized names filters: country_name, currency_name, currency_symbol, language_name, locale_name, timezone_name
-- localized formatters filters: format_currency, format_number, format_*_number, format_datetime, format_date, format_time
-- function: country_timezones
-
 ## Updated Functions
 
 ### config
