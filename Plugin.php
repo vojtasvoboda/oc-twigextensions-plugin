@@ -38,8 +38,10 @@ class Plugin extends PluginBase
         $functions += $this->getStringLoaderFunctions();
 
         // register Intl functions and filters
-        $functions += $this->getIntlFunctions();
-        $filters += $this->getIntlFilters();
+        if (class_exists('IntlDateFormatter')) {
+            $functions += $this->getIntlFunctions();
+            $filters += $this->getIntlFilters();
+        }
 
         // add Session function
         $functions += $this->getSessionFunction();
