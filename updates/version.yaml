@@ -31,3 +31,4 @@
 2.0.1: Minor fixes and update documentation
 2.0.2: Fix compatibility with October 3.0
 2.0.3: Fix for PHP without intl extension
+2.0.4: Fix loading intl filters requires Twig environment

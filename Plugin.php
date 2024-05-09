@@ -1,7 +1,9 @@
 <?php namespace VojtaSvoboda\TwigExtensions;
 
 use Carbon\Carbon;
+use Event;
 use System\Classes\PluginBase;
+use Twig\Environment;
 use Twig\Extension\StringLoaderExtension;
 use Twig\Extra\Intl\IntlExtension;
 
@@ -26,6 +28,16 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function boot()
+    {
+        // register Intl functions and filters
+        if (class_exists(IntlExtension::class)) {
+            Event::listen('system.extendTwig', function (Environment $twig) {
+                $twig->addExtension(new IntlExtension());
+            });
+        }
+    }
+
     /**
      * Add Twig extensions.
      */
@@ -36,12 +48,6 @@ class Plugin extends PluginBase
 
         // add String Loader functions
         $functions += $this->getStringLoaderFunctions();
-
-        // register Intl functions and filters
-        if (class_exists('IntlDateFormatter')) {
-            $functions += $this->getIntlFunctions();
-            $filters += $this->getIntlFilters();
-        }
 
         // add Session function
         $functions += $this->getSessionFunction();
@@ -77,36 +83,6 @@ class Plugin extends PluginBase
         }
 
         return $functions;
-    }
-
-    /**
-     * Returns Localized functions.
-     */
-    private function getIntlFunctions(): array
-    {
-        $intlExtension = new IntlExtension();
-
-        $functions = [];
-        foreach ($intlExtension->getFunctions() as $function) {
-            $functions[$function->getName()] = $function->getCallable();
-        }
-
-        return $functions;
-    }
-
-    /**
-     * Returns Localized filters.
-     */
-    private function getIntlFilters(): array
-    {
-        $intlExtension = new IntlExtension();
-
-        $filters = [];
-        foreach ($intlExtension->getFilters() as $filter) {
-            $filters[$filter->getName()] = $filter->getCallable();
-        }
-
-        return $filters;
     }
 
     /**
