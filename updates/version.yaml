@@ -33,3 +33,4 @@
 2.0.3: Fix for PHP without intl extension
 2.0.4: Fix loading intl filters requires Twig environment
 2.0.5: Fix checking if Intl is installed
+2.0.6: Fix compatibility with October 4.x
