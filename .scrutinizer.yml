@@ -1,7 +1,7 @@
 build:
     environment:
         php:
-            version: 8.0.2
+            version: 8.2.29
     dependencies:
         before:
             - find . -delete
