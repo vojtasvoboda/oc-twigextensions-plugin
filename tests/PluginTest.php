@@ -1,15 +1,32 @@
 <?php namespace VojtaSvoboda\TwigExtensions\Tests;
 
 use App;
-use Carbon\Carbon;
 use Config;
+use Event;
 use PluginTestCase;
+use System\Classes\MarkupManager;
 use Twig_Environment;
-
-// require_once __DIR__.'/../vendor/autoload.php';
+use VojtaSvoboda\TwigExtensions\Plugin;
 
 class PluginTest extends PluginTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        // register filters and functions
+        $plugin = new Plugin($this->app);
+        $plugin->boot();
+        $extensions = $plugin->registerMarkupTags();
+        $manager = MarkupManager::instance();
+        $manager->registerFilters($extensions['filters']);
+        $manager->registerFunctions($extensions['functions']);
+
+        // instantiate $twig to force firing system.extendTwig
+        $twig = $this->app->make('twig.environment');
+        Event::fire('system.extendTwig', [$twig]);
+    }
+
     /**
      * Return Twig environment
      *
@@ -68,7 +85,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ '<p><b>text</b></p>' | strip_tags('<p>') }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), '<p>text</p>');
+        $this->assertEquals($twigTemplate->render([]), '&lt;p&gt;text&lt;/p&gt;');
     }
 
     public function testWordWrapFilter()
@@ -78,7 +95,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' | wordwrap(10) }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), "Lorem ipsu\nm dolor si\nt amet, co\nnsectetur \nadipiscing\n elit");
+        $this->assertEquals($twigTemplate->render([]), "Lorem\nipsum\ndolor sit\namet,\nconsectetur\nadipiscing\nelit");
     }
 
     public function testVardumpFunction()
@@ -88,7 +105,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ var_dump('test') }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringContainsString('string(4) "test"', $twigTemplate->render([]));
+        $this->assertStringContainsString('string(4) &quot;test&quot;', $twigTemplate->render([]));
     }
 
     public function testVardumpFilter()
@@ -98,7 +115,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ 'test' | var_dump }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringContainsString('string(4) "test"', $twigTemplate->render([]));
+        $this->assertStringContainsString('string(4) &quot;test&quot;', $twigTemplate->render([]));
     }
 
     public function testSessionFunction()
@@ -121,7 +138,7 @@ class PluginTest extends PluginTestCase
         $template = "{{ trans('validation.accepted') }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertEquals($twigTemplate->render([]), 'The :attribute must be accepted.');
+        $this->assertEquals($twigTemplate->render([]), 'The :attribute field must be accepted.');
     }
 
     public function testTransFunctionWithParam()
@@ -129,9 +146,9 @@ class PluginTest extends PluginTestCase
         $twig = $this->getTwig();
         Config::set('app.locale', 'en');
 
-        $template = "{{ trans('backend::lang.access_log.hint', {'days': 60}) }}";
+        $template = "{{ trans('backend::lang.partial.not_found_name', {'name': 'test'}) }}";
 
         $twigTemplate = $twig->createTemplate($template);
-        $this->assertStringContainsString('60 days', $twigTemplate->render([]));
+        $this->assertStringContainsString("The partial &#039;test&#039; is not found.", $twigTemplate->render([]));
     }
 }
