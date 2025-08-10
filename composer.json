@@ -14,7 +14,7 @@
     "php": ">=8.0.2",
     "october/rain": "^3.0|^4.0",
     "composer/installers": "~1.0",
-    "twig/intl-extra": "^3.4"
+    "twig/intl-extra": "^3.4|^4.0"
   },
   "minimum-stability": "stable",
   "scripts": {
