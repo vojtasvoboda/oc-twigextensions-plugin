@@ -7,10 +7,7 @@ build:
             - find . -delete
             - git clone https://github.com/octobercms/october.git .
             - composer install --no-interaction --prefer-source
-            - mkdir -p ./plugins/vojtasvoboda/twigextensions
-            - cd plugins/vojtasvoboda/twigextensions
-            - git clone https://github.com/vojtasvoboda/oc-twigextensions-plugin.git .
-            - composer install
+            - composer require vojtasvoboda/oc-twigextensions-plugin
     tests:
         override:
             -
