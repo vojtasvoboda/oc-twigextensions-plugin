@@ -11,7 +11,7 @@ build:
     tests:
         override:
             -
-                command: 'phpunit plugins/vojtasvoboda/twigextensions/tests --coverage-clover=coverage'
+                command: 'vendor/bin/phpunit plugins/vojtasvoboda/twigextensions/tests --coverage-clover=coverage'
                 coverage:
                     file: 'coverage'
                     format: 'php-clover'
