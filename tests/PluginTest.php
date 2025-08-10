@@ -6,7 +6,7 @@ use Config;
 use PluginTestCase;
 use Twig_Environment;
 
-require_once __DIR__.'/../vendor/autoload.php';
+// require_once __DIR__.'/../vendor/autoload.php';
 
 class PluginTest extends PluginTestCase
 {
