@@ -2,8 +2,14 @@ build:
     environment:
         php:
             version: 8.2.29
+        apt_packages:
+          - sqlite3
+          - libsqlite3-dev
     dependencies:
         before:
+            - sudo apt-get update
+            - sudo apt-get install -y sqlite3 libsqlite3-dev
+            - sqlite3 --version
             - find . -delete
             - git clone https://github.com/octobercms/october.git .
             - composer install --no-interaction --prefer-source
