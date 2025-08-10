@@ -9,8 +9,9 @@ Twig extensions plugin for OctoberCMS adds new filter and functions to your temp
 
 ## Versions
 
-There are two versions of this plugin - 1.x and 2.x. For older October 1.0.x, 1.1.x or 2.x.x use special [branch 1.x](https://github.com/vojtasvoboda/oc-twigextensions-plugin/tree/1.x). For October 3.1+ use master branch. 
-For old Laravel 5.4 October's versions use special branch `laravel54`.
+October 1.0.x, 1.1.x or 2.x.x - use special [branch 1.x](https://github.com/vojtasvoboda/oc-twigextensions-plugin/tree/1.x)
+October 3.1+ or 4.x  - use master branch
+For old Laravel 5.4 October's versions  - use special branch `laravel54`
 
 For migrating between plugin's version 1 and version 2 you can use special [UPGRADE.md](UPGRADE.md) guide.
 
